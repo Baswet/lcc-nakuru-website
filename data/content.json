@@ -7,7 +7,16 @@
   "url": "https://baswet.github.io/lcc-nakuru-website/",
   "vision": "Transforming Nations for Christ",
   "mission": "Life Celebration Centre exists to reconcile people to God, equip them for Ministry to God and the people with a transformative agenda.",
-  "locale": "en_KE"
+  "locale": "en_KE",
+  "values": [
+   "Hospitality",
+   "Integrity",
+   "Servanthood",
+   "Fellowship",
+   "Commitment",
+   "Excellence"
+  ],
+  "values_source": "https://cuttingedgeconference.co.ke/about/"
  },
  "contact": {
   "phone": "0722 864 864",
@@ -27,25 +36,59 @@
  },
  "services": {
   "verified": false,
-  "note": "Sunday service times are being confirmed with the church office. Please call 0722 864 864 before your first visit.",
+  "times_note": "Exact start and end times are being confirmed with the church office — please call 0722 864 864 before your first visit.",
   "items": [
    {
-    "name": "Sunday Services",
+    "name": "First Service",
     "day": "Sunday",
-    "time": "Times being confirmed",
-    "detail": "Multiple services (a Second Service is streamed on YouTube)"
+    "time": "Morning · time to be confirmed",
+    "status": "confirmed",
+    "detail": "The first of two Sunday services, streamed live on YouTube every week.",
+    "watch": "https://www.youtube.com/watch?v=co-4DGlDzXQ",
+    "source": "https://www.youtube.com/@DeliveranceChurchLCC/streams"
+   },
+   {
+    "name": "Second Service",
+    "day": "Sunday",
+    "time": "Late morning · time to be confirmed",
+    "status": "confirmed",
+    "detail": "The second Sunday service, also streamed live every week.",
+    "watch": "https://www.youtube.com/watch?v=iHh3K3p36Y8",
+    "source": "https://www.youtube.com/@DeliveranceChurchLCC/streams"
+   },
+   {
+    "name": "Connection Time",
+    "day": "After service",
+    "time": "Times vary",
+    "status": "confirmed",
+    "detail": "Fellowship moments that bring the church family closer together.",
+    "source": "facebook.com/LifeCelebrationCentre (post: #connectiontime)"
+   },
+   {
+    "name": "Praise Express Service",
+    "day": "Periodic Sunday",
+    "time": "Dates announced",
+    "status": "confirmed",
+    "detail": "A full service of praise and worship, held every few months (most recently in October 2026).",
+    "watch": "https://www.youtube.com/watch?v=I-Zw0aavDF4",
+    "source": "https://www.youtube.com/@DeliveranceChurchLCC/streams"
+   },
+   {
+    "name": "Kesha (night of prayer)",
+    "day": "Special nights",
+    "time": "Dates announced",
+    "status": "confirmed",
+    "detail": "All-night worship and prayer — including the annual Crossover Kesha on 31 December.",
+    "watch": "https://www.youtube.com/watch?v=dSnGjBfdnkI",
+    "source": "https://www.youtube.com/@DeliveranceChurchLCC/streams"
    },
    {
     "name": "Youth Ablaze",
-    "day": "Youth night of worship",
+    "day": "Youth nights",
     "time": "Dates announced on Facebook",
-    "detail": "Worship night for young people"
-   },
-   {
-    "name": "Morning Devotion",
-    "day": "Start of the week",
-    "time": "Shared online",
-    "detail": "Devotional encouragement"
+    "status": "reported",
+    "detail": "Worship nights for young people.",
+    "source": "Facebook highlights"
    }
   ]
  },
@@ -59,37 +102,87 @@
   {
    "name": "Rev. Elijah Mwangi",
    "role": "Lead Pastor",
-   "bio": "Rev. Elijah Mwangi leads Life Celebration Centre and convenes the annual Cutting Edge Conference. His messages are shared weekly on the LCC YouTube channel.",
-   "verified": true
+   "bio": "Rev. Elijah Mwangi is the Lead Pastor at Life Celebration Centre of Deliverance Church International, Nakuru. With a deep passion for planting and strengthening churches, he has raised and equipped leaders locally and internationally through preaching, teaching and intentional discipleship.",
+   "verified": true,
+   "bio_more": "He holds a Master’s Degree in Theology from Beacon University College of Ministry (USA), a Master’s Degree in Urban and Regional Planning from the University of Nairobi, and a Bachelor’s Degree in Engineering from Egerton University. He is also an author whose writings focus on biblical truth, leadership development and the Great Commission. He is married to Mary Wambui Maina.",
+   "source": "https://cuttingedgeconference.co.ke/about/"
   }
  ],
  "ministries": [
   {
-   "name": "One Accord Ministers",
+   "slug": "worship",
+   "name": "Praise & Worship",
    "kind": "Worship",
-   "text": "LCC's worship ministers, whose covers of songs such as “Adonai”, “U Mwema” and “Worthy is the Lamb” are shared on our YouTube channel.",
-   "video": "2zIbRK7eDNw"
+   "tag": "One Accord Ministers",
+   "text": "LCC’s worship ministers lead the church in praise every Sunday and at Praise Express services. Their recordings — from “Adonai” to “U Mwema” — are shared on our YouTube channel.",
+   "video": "2zIbRK7eDNw",
+   "activities": [
+    "Sunday worship",
+    "Praise Express Service",
+    "Worship recordings"
+   ],
+   "verified": true
   },
   {
-   "name": "Youth Ablaze",
-   "kind": "Youth",
-   "text": "A night of worship for young people. Dates are announced on our Facebook page."
+   "slug": "youth",
+   "name": "Youth & Students",
+   "kind": "Next generation",
+   "tag": "Youth Ablaze · InterVarsity Worship",
+   "text": "Worship nights for young people, and InterVarsity Worship Experiences that bring university students together for worship and fellowship.",
+   "video": "fgq2wgHKiW8",
+   "activities": [
+    "Youth Ablaze nights",
+    "InterVarsity Worship Experience"
+   ],
+   "verified": true
   },
   {
-   "name": "Morning Devotion",
-   "kind": "Devotion",
-   "text": "Short devotional encouragement to start the week, shared online."
+   "slug": "prayer",
+   "name": "Prayer",
+   "kind": "Prayer",
+   "tag": "Kesha",
+   "text": "Nights of prayer and worship — including the annual Crossover Kesha — and private prayer support from the pastoral team.",
+   "video": "dSnGjBfdnkI",
+   "activities": [
+    "Kesha nights",
+    "Crossover Kesha (31 Dec)",
+    "Prayer requests"
+   ],
+   "verified": true
   },
   {
-   "name": "CityAnnex",
-   "kind": "Outreach",
-   "text": "Featured in our social media highlights. Details to be confirmed by the church office."
-  },
-  {
-   "name": "Cutting Edge Conference",
+   "slug": "leaders",
+   "name": "Leadership Development",
    "kind": "Equipping",
-   "text": "Our annual international conference for ministers and believers, convened by Rev. Elijah Mwangi.",
-   "link": "conference.html"
+   "tag": "Leaders' Summit",
+   "text": "Leaders' Summits that equip, empower and inspire leaders to serve with excellence, wisdom and purpose.",
+   "video": "3DJ4vriLyvo",
+   "activities": [
+    "Leaders' Summit",
+    "Pastors' and Spouses Conference"
+   ],
+   "verified": true
+  },
+  {
+   "slug": "fellowship",
+   "name": "Fellowship",
+   "kind": "Community",
+   "tag": "Connection Time",
+   "text": "Moments beyond the service filled with love, laughter, fellowship and beautiful connections.",
+   "activities": [
+    "Connection time",
+    "Church celebrations"
+   ],
+   "verified": true
+  },
+  {
+   "slug": "conference",
+   "name": "Cutting Edge Conference",
+   "kind": "Conference",
+   "tag": "Every April",
+   "text": "Our annual conference to equip the saints for the work of the ministry.",
+   "link": "conference.html",
+   "verified": true
   }
  ],
  "events": [
@@ -102,7 +195,9 @@
    "summary": "Theme: Commissioning for the Global Mission. With Rev. Elijah Mwangi (convener), Bishop Steve Kamau (USA), Bishop Darnell Williams (USA) and Rev. George Macharia (Kenya).",
    "url": "conference.html",
    "external": "https://cuttingedgeconference.co.ke/form/conference-delegates-registration-2027/",
-   "featured": true
+   "featured": true,
+   "category": "Conference",
+   "anchor": "John 4:35"
   }
  ],
  "conference": {
@@ -158,6 +253,35 @@
    "65xaXc3ghw8",
    "ghcoCshX5V4",
    "DGPS3RwhIGM"
+  ],
+  "anchor": "John 4:35",
+  "edition_note": "Held every April since 2018 (not held 2020–2022 due to COVID-19).",
+  "all_speakers": [
+   "Apostle Patrick Muriithi (Kenya)",
+   "Apostle Moses Kariuki (Kenya)",
+   "Apostle Jesse Karanja (Kenya)",
+   "Prophet Paul Mwaniki (Kenya)",
+   "Rev. George Macharia (Kenya)",
+   "Min. Njoki Munyi (Kenya)",
+   "Bishop Designate Alvin “Iz-Real” Motley (USA)",
+   "Bishop Dr. Townsend (USA)",
+   "Bishop Darnell Williams (USA)",
+   "Bishop Steve Kamau (USA)",
+   "Pastor Triss Horwood (UK)",
+   "Bishop Dr. Mark Kariuki (Kenya)",
+   "Bishop Isaakah Wawire (Kenya)"
+  ],
+  "start_iso": "2027-03-30T09:00:00+03:00",
+  "archive_2026": [
+   "GOjZxrPfljE",
+   "WV2eA46Ie68",
+   "wqtcWhcuyZ4",
+   "Ulq8Lgy2EEo",
+   "qAgs0VqDNuc",
+   "5uGdOfLn0gw",
+   "gyi3RTLNO-s",
+   "DG72JnhcCkM",
+   "628ibWuqK_s"
   ]
  },
  "news": [
@@ -189,6 +313,254 @@
   "link": "conference.html"
  },
  "videos": [
+  {
+   "id": "co-4DGlDzXQ",
+   "title": "Sunday Service · First Service",
+   "full_title": "Sunday Service · First Service",
+   "speaker": "",
+   "category": "service",
+   "published": "22 Nov 2026"
+  },
+  {
+   "id": "iHh3K3p36Y8",
+   "title": "Sunday Service · Second Service",
+   "full_title": "Sunday Service · Second Service",
+   "speaker": "",
+   "category": "service",
+   "published": "22 Nov 2026"
+  },
+  {
+   "id": "aXyp3cKPtCA",
+   "title": "The Secret of Sustainable Prosperity · First Service",
+   "full_title": "The Secret of Sustainable Prosperity · First Service",
+   "speaker": "",
+   "category": "service",
+   "published": "15 Nov 2026"
+  },
+  {
+   "id": "acHsLMhjjHU",
+   "title": "The Secret of Sustainable Prosperity · Second Service",
+   "full_title": "The Secret of Sustainable Prosperity · Second Service",
+   "speaker": "",
+   "category": "service",
+   "published": "15 Nov 2026"
+  },
+  {
+   "id": "1CLkl02BWuc",
+   "title": "Sunday Service · First Service",
+   "full_title": "Sunday Service · First Service",
+   "speaker": "",
+   "category": "service",
+   "published": "8 Nov 2026"
+  },
+  {
+   "id": "bN0jxYMPqn4",
+   "title": "Sunday Service · Second Service",
+   "full_title": "Sunday Service · Second Service",
+   "speaker": "",
+   "category": "service",
+   "published": "8 Nov 2026"
+  },
+  {
+   "id": "ObF54lSqEnA",
+   "title": "Overcoming Spiritual Weariness · First Service",
+   "full_title": "Overcoming Spiritual Weariness · First Service",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "service",
+   "published": "Oct 2026"
+  },
+  {
+   "id": "ajtVtIPGHdQ",
+   "title": "Understanding the Nature of God's Word · First Service",
+   "full_title": "Understanding the Nature of God's Word · First Service",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "service",
+   "published": "Sep 2026"
+  },
+  {
+   "id": "gZ1vW5RiIjw",
+   "title": "The True Disciple · First Service",
+   "full_title": "The True Disciple · First Service",
+   "speaker": "Rev. Gabriel Ngugi",
+   "category": "service",
+   "published": "Aug 2026"
+  },
+  {
+   "id": "adrrFrOKE90",
+   "title": "Challenging your Mountain · First Service",
+   "full_title": "Challenging your Mountain · First Service",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "service",
+   "published": "Aug 2026"
+  },
+  {
+   "id": "xYOvwzOSPeE",
+   "title": "The Assignment after the Miracles · First Service",
+   "full_title": "The Assignment after the Miracles · First Service",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "service",
+   "published": "Aug 2026"
+  },
+  {
+   "id": "HOfFQw-D36g",
+   "title": "Who are you in the Multitude? · First Service",
+   "full_title": "Who are you in the Multitude? · First Service",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "service",
+   "published": "Aug 2026"
+  },
+  {
+   "id": "dDq2cVR3hFA",
+   "title": "The Baptism of Compassion · First Service",
+   "full_title": "The Baptism of Compassion · First Service",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "service",
+   "published": "Aug 2026"
+  },
+  {
+   "id": "I-Zw0aavDF4",
+   "title": "Praise Express Service",
+   "full_title": "Praise Express Service",
+   "speaker": "",
+   "category": "praise",
+   "published": "Oct 2026"
+  },
+  {
+   "id": "s1Dg15B0b40",
+   "title": "Praise Express Service",
+   "full_title": "Praise Express Service",
+   "speaker": "",
+   "category": "praise",
+   "published": "Jul 2026"
+  },
+  {
+   "id": "dg01jGVFoII",
+   "title": "Praise Express Service",
+   "full_title": "Praise Express Service",
+   "speaker": "",
+   "category": "praise",
+   "published": "May 2026"
+  },
+  {
+   "id": "CabTVey6QQg",
+   "title": "Praise Express Service",
+   "full_title": "Praise Express Service",
+   "speaker": "",
+   "category": "praise",
+   "published": "Mar 2026"
+  },
+  {
+   "id": "dSnGjBfdnkI",
+   "title": "Crossover Kesha 2025–2026",
+   "full_title": "Crossover Kesha 2025–2026",
+   "speaker": "",
+   "category": "special",
+   "published": "31 Dec 2025"
+  },
+  {
+   "id": "3DJ4vriLyvo",
+   "title": "Leaders' Summit · Session 3",
+   "full_title": "Leaders' Summit · Session 3",
+   "speaker": "Bishop Jimmy Kimani",
+   "category": "special",
+   "published": "Nov 2026"
+  },
+  {
+   "id": "E-mv4PqqOhY",
+   "title": "Leaders' Summit · Session 2",
+   "full_title": "Leaders' Summit · Session 2",
+   "speaker": "",
+   "category": "special",
+   "published": "Nov 2026"
+  },
+  {
+   "id": "Qey-QWMEqL0",
+   "title": "Pastors' and Spouses Conference · Day 4",
+   "full_title": "Pastors' and Spouses Conference · Day 4",
+   "speaker": "",
+   "category": "special",
+   "published": "Jun 2026"
+  },
+  {
+   "id": "fgq2wgHKiW8",
+   "title": "InterVarsity Worship Experience 2025 · Season 2",
+   "full_title": "InterVarsity Worship Experience 2025 · Season 2",
+   "speaker": "",
+   "category": "special",
+   "published": "2025"
+  },
+  {
+   "id": "GOjZxrPfljE",
+   "title": "Cutting Edge Conference 2026 · Day 6 Sunday Service",
+   "full_title": "Cutting Edge Conference 2026 · Day 6 Sunday Service",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
+  {
+   "id": "WV2eA46Ie68",
+   "title": "Cutting Edge Conference 2026 · Day 5 Session 3",
+   "full_title": "Cutting Edge Conference 2026 · Day 5 Session 3",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
+  {
+   "id": "wqtcWhcuyZ4",
+   "title": "Cutting Edge Conference 2026 · Day 5 Session 1",
+   "full_title": "Cutting Edge Conference 2026 · Day 5 Session 1",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
+  {
+   "id": "Ulq8Lgy2EEo",
+   "title": "Cutting Edge Conference 2026 · Day 4 Session 4",
+   "full_title": "Cutting Edge Conference 2026 · Day 4 Session 4",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
+  {
+   "id": "qAgs0VqDNuc",
+   "title": "Cutting Edge Conference 2026 · Day 4 Session 3",
+   "full_title": "Cutting Edge Conference 2026 · Day 4 Session 3",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
+  {
+   "id": "5uGdOfLn0gw",
+   "title": "Cutting Edge Conference 2026 · Day 4 Session 2",
+   "full_title": "Cutting Edge Conference 2026 · Day 4 Session 2",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
+  {
+   "id": "gyi3RTLNO-s",
+   "title": "Cutting Edge Conference 2026 · Day 3 Session 3",
+   "full_title": "Cutting Edge Conference 2026 · Day 3 Session 3",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
+  {
+   "id": "DG72JnhcCkM",
+   "title": "Cutting Edge Conference 2026 · Day 3 Session 2",
+   "full_title": "Cutting Edge Conference 2026 · Day 3 Session 2",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
+  {
+   "id": "628ibWuqK_s",
+   "title": "Cutting Edge Conference 2026 · Day 3 Session 1",
+   "full_title": "Cutting Edge Conference 2026 · Day 3 Session 1",
+   "speaker": "",
+   "category": "conference",
+   "published": "Apr 2026"
+  },
   {
    "id": "vttJO-PLggk",
    "title": "The River of God",
@@ -461,5 +833,182 @@
    "category": "sermon",
    "published": "3 years ago (as of 25 Nov 2026)"
   }
- ]
+ ],
+ "sources": {
+  "vision": "YouTube channel description; Facebook page",
+  "mission": "YouTube channel description; https://cuttingedgeconference.co.ke/about/",
+  "values": "https://cuttingedgeconference.co.ke/about/",
+  "pastor_bio": "https://cuttingedgeconference.co.ke/about/",
+  "conference": "https://cuttingedgeconference.co.ke/",
+  "services": "https://www.youtube.com/@DeliveranceChurchLCC/streams",
+  "address": "facebook.com/LifeCelebrationCentre (About)",
+  "phone": "Facebook About; cuttingedgeconference.co.ke"
+ },
+ "about": {
+  "intro": "Life Celebration Centre (LCC) is a congregation of Deliverance Church International on General Kariba Street in Freehold, Nakuru. Led by Rev. Elijah Mwangi, LCC gathers every Sunday for two services, streams its worship online, and hosts the annual Cutting Edge Conference for believers from Nakuru and beyond.",
+  "family": "Beyond the Sunday service, LCC makes room for connection time — moments of fellowship, laughter and friendship that turn a congregation into a family.",
+  "timeline": [
+   {
+    "year": "2018",
+    "title": "Cutting Edge Conference begins",
+    "text": "LCC hosts the first Cutting Edge Conference, built on Ephesians 4:12: “equipping the saints for the work of the ministry.”",
+    "source": "https://cuttingedgeconference.co.ke/about/"
+   },
+   {
+    "year": "2020 – 2022",
+    "title": "A pause, not an end",
+    "text": "The conference was not held for three years because of COVID-19 restrictions on gatherings.",
+    "source": "https://cuttingedgeconference.co.ke/about/"
+   },
+   {
+    "year": "2024",
+    "title": "Cutting Edge Conference 2024",
+    "text": "Rev. Elijah Mwangi opens the conference; sessions are streamed on the LCC YouTube channel.",
+    "source": "https://www.youtube.com/watch?v=65xaXc3ghw8"
+   },
+   {
+    "year": "2025",
+    "title": "InterVarsity Worship Experience",
+    "text": "University students gather at LCC for nights of worship and fellowship.",
+    "source": "https://www.youtube.com/watch?v=fgq2wgHKiW8 ; Nation (local.nation.co.ke)"
+   },
+   {
+    "year": "31 Dec 2025",
+    "title": "Crossover Kesha",
+    "text": "The church crosses into 2026 together in an all-night service of worship and prayer.",
+    "source": "https://www.youtube.com/watch?v=dSnGjBfdnkI"
+   },
+   {
+    "year": "April 2026",
+    "title": "6th Cutting Edge Conference",
+    "text": "Six days of evangelism, teaching and preaching — the sixth edition since 2018.",
+    "source": "https://cuttingedgeconference.co.ke/about/"
+   },
+   {
+    "year": "November 2026",
+    "title": "Leaders' Summit",
+    "text": "Leaders gather to be equipped and inspired, with guest speaker Bishop Jimmy Kimani.",
+    "source": "https://www.youtube.com/@DeliveranceChurchLCC/streams"
+   },
+   {
+    "year": "30 Mar – 4 Apr 2027",
+    "title": "Cutting Edge Conference 2027",
+    "text": "“Commissioning for the Global Mission” — anchor scripture John 4:35.",
+    "source": "https://cuttingedgeconference.co.ke/"
+   }
+  ]
+ },
+ "pulpit": [
+  {
+   "name": "Rev. Elijah Mwangi",
+   "note": "Lead Pastor"
+  },
+  {
+   "name": "Rev. Gabriel Ngugi",
+   "note": "Preaches regularly at Sunday services (role to be confirmed)"
+  },
+  {
+   "name": "Rev. George Macharia",
+   "note": "Cutting Edge Conference speaker"
+  },
+  {
+   "name": "Bishop Jimmy Kimani",
+   "note": "Guest speaker, Leaders' Summit 2026"
+  }
+ ],
+ "ministries_note": "Children's, teens', women's and men's ministries are not yet listed because we have not found official details. Ask the welcome team on Sunday, or contact the church office.",
+ "past_events": [
+  {
+   "title": "Leaders' Summit 2026",
+   "when": "November 2026",
+   "category": "Leadership",
+   "summary": "Guest speaker Bishop Jimmy Kimani. A day of vision, purpose, growth and divine alignment.",
+   "video": "3DJ4vriLyvo"
+  },
+  {
+   "title": "Praise Express Service",
+   "when": "October 2026",
+   "category": "Worship",
+   "summary": "A full service of praise and worship at LCC.",
+   "video": "I-Zw0aavDF4"
+  },
+  {
+   "title": "Pastors' and Spouses Conference",
+   "when": "June 2026",
+   "category": "Leadership",
+   "summary": "Four days of sessions for pastors and their spouses, streamed on the LCC channel.",
+   "video": "Qey-QWMEqL0"
+  },
+  {
+   "title": "Cutting Edge Conference 2026",
+   "when": "April 2026",
+   "category": "Conference",
+   "summary": "The sixth edition of LCC’s annual conference — six days of evangelism, teaching and preaching.",
+   "video": "GOjZxrPfljE"
+  },
+  {
+   "title": "Crossover Kesha 2025–2026",
+   "when": "31 December 2025",
+   "category": "Prayer",
+   "summary": "The church crossed into the new year in worship and prayer.",
+   "video": "dSnGjBfdnkI"
+  },
+  {
+   "title": "InterVarsity Worship Experience 2025",
+   "when": "2025",
+   "category": "Youth",
+   "summary": "University students gathered for a night of worship and fellowship.",
+   "video": "fgq2wgHKiW8"
+  },
+  {
+   "title": "Cutting Edge Conference 2024",
+   "when": "2024",
+   "category": "Conference",
+   "summary": "Opening session with Rev. Elijah Mwangi.",
+   "video": "65xaXc3ghw8"
+  }
+ ],
+ "photos": [
+  {
+   "slot": "about-hero-1",
+   "fb": "1188255743457773",
+   "desc": "LCC Facebook cover image",
+   "approved": false,
+   "src": "",
+   "fallback_video": "iHh3K3p36Y8"
+  },
+  {
+   "slot": "about-hero-2",
+   "fb": "1444386234511388",
+   "desc": "Sunday service congregation",
+   "approved": false,
+   "src": "",
+   "fallback_video": "co-4DGlDzXQ"
+  },
+  {
+   "slot": "about-hero-3",
+   "fb": "1458372976446047",
+   "desc": "Connection time fellowship",
+   "approved": false,
+   "src": "",
+   "fallback_video": "I-Zw0aavDF4"
+  },
+  {
+   "slot": "about-hero-4",
+   "fb": "1451367783813233",
+   "desc": "Leaders' Summit 2026",
+   "approved": false,
+   "src": "",
+   "fallback_video": "3DJ4vriLyvo"
+  },
+  {
+   "slot": "about-hero-5",
+   "fb": "1444385771178101",
+   "desc": "Congregation in worship",
+   "approved": false,
+   "src": "",
+   "fallback_video": "GOjZxrPfljE"
+  }
+ ],
+ "photos_note": "Photo slots are filled with LCC's own YouTube stills (each linking to its video) until the church office approves its Facebook photographs. Set approved:true and src to a file in assets/images/ to switch."
 }
