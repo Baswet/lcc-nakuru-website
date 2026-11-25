@@ -1,0 +1,6 @@
+private/config.php
+private/submissions/*.json
+private/backups/
+private/rate.json
+assets/uploads/*
+!assets/uploads/.htaccess
