@@ -972,43 +972,66 @@
   {
    "slot": "about-hero-1",
    "fb": "1188255743457773",
-   "desc": "LCC Facebook cover image",
+   "desc": "Praise Express Service: the congregation in worship",
    "approved": false,
    "src": "",
-   "fallback_video": "iHh3K3p36Y8"
+   "fallback_video": "I-Zw0aavDF4",
+   "frame": 1
   },
   {
    "slot": "about-hero-2",
    "fb": "1444386234511388",
-   "desc": "Sunday service congregation",
+   "desc": "Cutting Edge Conference 2026: hands raised in worship",
    "approved": false,
    "src": "",
-   "fallback_video": "co-4DGlDzXQ"
+   "fallback_video": "GOjZxrPfljE",
+   "frame": 2
   },
   {
    "slot": "about-hero-3",
    "fb": "1458372976446047",
-   "desc": "Connection time fellowship",
+   "desc": "Sunday Second Service: the worship team",
    "approved": false,
    "src": "",
-   "fallback_video": "I-Zw0aavDF4"
+   "fallback_video": "iHh3K3p36Y8",
+   "frame": 2
   },
   {
    "slot": "about-hero-4",
    "fb": "1451367783813233",
-   "desc": "Leaders' Summit 2026",
+   "desc": "Crossover Kesha: worship into the new year",
    "approved": false,
    "src": "",
-   "fallback_video": "3DJ4vriLyvo"
+   "fallback_video": "dSnGjBfdnkI",
+   "frame": 2
   },
   {
    "slot": "about-hero-5",
    "fb": "1444385771178101",
-   "desc": "Congregation in worship",
+   "desc": "Sunday First Service: leading worship",
    "approved": false,
    "src": "",
-   "fallback_video": "GOjZxrPfljE"
+   "fallback_video": "co-4DGlDzXQ",
+   "frame": 2
+  },
+  {
+   "slot": "story-a",
+   "fb": "",
+   "desc": "Worship at the Cutting Edge Conference 2026",
+   "approved": false,
+   "src": "",
+   "fallback_video": "GOjZxrPfljE",
+   "frame": 2
+  },
+  {
+   "slot": "story-b",
+   "fb": "",
+   "desc": "Praise Express Service",
+   "approved": false,
+   "src": "",
+   "fallback_video": "I-Zw0aavDF4",
+   "frame": 2
   }
  ],
- "photos_note": "Photo slots are filled with LCC's own YouTube stills (each linking to its video) until the church office approves its Facebook photographs. Set approved:true and src to a file in assets/images/ to switch."
+ "photos_note": "Photo slots show frames from LCC's own YouTube streams (each linked to its video) until the church office approves its photographs. Set approved:true and src to switch."
 }
