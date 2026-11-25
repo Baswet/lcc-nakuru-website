@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Concept B — Cinematic Worship Experience</title>
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter Tight;src:url(fonts/inter-tight-latin-wght-normal.woff2) format("woff2");font-weight:100 900}
+:root{--night:#12100E;--coal:#1D1916;--ember:#E0892F;--sun:#F3C567;--bone:#F2EADF;--dim:#A89C8E}
+*{box-sizing:border-box;margin:0}body{background:var(--night);color:var(--bone);font:400 17px/1.6 "Inter Tight",system-ui,sans-serif}
+header{position:absolute;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(20px,4vw,48px);z-index:2}
+.mark{font:400 22px Anton;letter-spacing:.06em}nav a{color:var(--bone);text-decoration:none;margin-left:24px;font-size:14px;letter-spacing:.08em;text-transform:uppercase}nav .live{background:var(--ember);color:var(--night);padding:9px 16px;border-radius:4px;font-weight:700}
+.hero{min-height:92vh;display:flex;align-items:flex-end;padding:0 clamp(20px,4vw,48px) 72px;background:radial-gradient(ellipse at 70% 30%,#7a3e14 0,#2a1a10 40%,var(--night) 75%);position:relative}
+.hero:after{content:"Awaiting LCC-approved worship photo";position:absolute;right:24px;top:90px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff5}
+h1{font:400 clamp(64px,12vw,184px)/.86 Anton;text-transform:uppercase;letter-spacing:.01em}h1 span{color:var(--sun)}
+.row{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}.btn{padding:14px 24px;border-radius:4px;text-decoration:none;font-weight:600}.b1{background:var(--sun);color:var(--night)}.b2{border:1px solid #fff4;color:var(--bone)}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--coal)}.strip div{padding:26px clamp(20px,3vw,40px);border-right:1px solid #ffffff12}.strip small{color:var(--dim);text-transform:uppercase;letter-spacing:.12em;font-size:11px}.strip b{display:block;font:400 26px Anton;letter-spacing:.03em;margin-top:6px}
+.sec{padding:90px clamp(20px,4vw,48px)}.sec h2{font:400 clamp(40px,5vw,76px)/.95 Anton;text-transform:uppercase}
+.vids{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-top:36px}.v{aspect-ratio:16/9;background:linear-gradient(135deg,#3b2414,#12100e);border-radius:6px;display:flex;align-items:flex-end;padding:16px;font-weight:600}
+@media(max-width:760px){.strip,.vids{grid-template-columns:1fr 1fr}nav a:not(.live){display:none}.vids .v:first-child{grid-column:1/-1}}
+</style></head><body>
+<header><div class="mark">LCC NAKURU</div><nav><a href="#">Watch</a><a href="#">Visit</a><a href="#">Conference</a><a href="#">Give</a><a class="live" href="#">● Watch live</a></nav></header>
+<section class="hero"><div><h1>Celebrate<br><span>Life.</span></h1><div class="row"><a class="btn b1" href="#">Plan your visit</a><a class="btn b2" href="#">Latest message ▶</a></div></div></section>
+<div class="strip"><div><small>Vision</small><b>Transforming nations</b></div><div><small>Sundays</small><b>Times TBC</b></div><div><small>Where</small><b>Kariba St, Nakuru</b></div><div><small>30 Mar–4 Apr 2027</small><b>Cutting Edge</b></div></div>
+<section class="sec"><h2>Watch &amp; worship</h2><div class="vids"><div class="v">The River of God</div><div class="v">REJESHA — Live at LCC</div><div class="v">The Help of God</div></div></section>
+</body></html>
