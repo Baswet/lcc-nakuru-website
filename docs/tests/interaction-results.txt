@@ -1,0 +1,20 @@
+PASS  slideshow: first slide visible
+PASS  slideshow: next moves to slide 2
+PASS  slideshow: caption updates
+PASS  slideshow: pause toggles
+PASS  lightbox: opens with video iframe
+PASS  lightbox: arrow key advances
+PASS  lightbox: Esc closes and clears video
+PASS  rail: arrow scrolls row
+PASS  countdown: shows days
+PASS  sermons: category filter
+PASS  sermons: speaker filter
+PASS  video: lite embed loads nocookie iframe on click
+PASS  events: past filter
+PASS  events: no past event shown as upcoming
+PASS  visit: map loads only on click
+PASS  visit form: validation message
+PASS  gallery: category filter
+PASS  mobile: menu opens
+PASS  mobile: Esc closes menu
+PASS  reduced motion: slideshow starts paused

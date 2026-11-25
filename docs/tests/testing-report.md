@@ -1,4 +1,14 @@
-# Testing Report — LCC Nakuru website
+# Testing Report: LCC Nakuru website (v2 results first, v1 below)
+
+## v2: 25 Nov 2026
+- 23 pages × 8 widths: 0 overflow, 0 JS errors, 0 small touch targets, 0 broken links.
+- axe WCAG 2.1 AA: 0 violations (fixed: dark-panel contrast, values grid at 320–390, heading order, slideshow dots).
+- Interactions: 20/20 pass (`interactions.py`, `interaction-results.txt`).
+- Admin v2: photo-slot path traversal blocked, non-https links rejected, visitor enquiry form saved privately.
+
+---
+
+## v1
 
 **Date:** 25 November 2026 · **Build:** `tools/build.py` from `data/content.json`
 **Tools:** Playwright + Google Chrome (headless), axe-core 4.x, PHP 8.3 built-in server, curl. The script is `tests/qa.py`; raw results are in `tests/qa-results.json`.
