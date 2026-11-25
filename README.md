@@ -13,11 +13,14 @@ Website for LCC Nakuru: **preview build**. All content comes from public, verifi
 | `api/` | Form endpoints (PHP hosting only) |
 | `admin/` | Simple CMS (PHP hosting only) |
 | `private/` | Server-only helpers and submissions; web access denied |
-| `docs/` | Research, competitor analysis, design system, testing report, screenshots |
+| `docs/` | Research, inspiration board, asset inventory, design system, testing report, **FINAL-REPORT.md**, screenshots |
 
 ## Edit content
 1. **Static (GitHub Pages):** edit `data/content.json`, run `python3 tools/build.py`, then commit.
 2. **PHP host (7.4–8.4):** upload everything, run `php tools/set-admin-password.php <username>` on the server, then sign in at `/admin/`. Admin changes show immediately in the dynamic sections (notice, giving, sermon library). Run the build to refresh the pre-rendered HTML for search engines.
+
+## Photos (approval-ready)
+Photo slots in `content.json → photos[]` show LCC's own YouTube stills until the church approves its photographs. To switch, open admin, go to Images, upload the photo, then go to Photo slots, choose it, tick Approved, and rebuild.
 
 ## Before launch (church office to confirm)
 - [ ] Sunday service times
