@@ -55,9 +55,11 @@ switch ($act) {
         $items = [];
         foreach ((array)($_POST['name'] ?? []) as $i => $n) {
             $n = lcc_clean((string)$n, 80); if ($n === '') continue;
-            $items[] = ['name' => $n, 'day' => lcc_clean((string)($_POST['day'][$i] ?? ''), 60), 'time' => lcc_clean((string)($_POST['time'][$i] ?? ''), 60), 'detail' => lcc_clean((string)($_POST['detail'][$i] ?? ''), 200)];
+            $w = lcc_clean((string)($_POST['watch'][$i] ?? ''), 200);
+            $items[] = ['name' => $n, 'day' => lcc_clean((string)($_POST['day'][$i] ?? ''), 60), 'time' => lcc_clean((string)($_POST['time'][$i] ?? ''), 60), 'detail' => lcc_clean((string)($_POST['detail'][$i] ?? ''), 200),
+                'status' => (($_POST['status'][$i] ?? '') === 'confirmed') ? 'confirmed' : 'reported', 'watch' => preg_match('~^https://~', $w) ? $w : '', 'source' => lcc_clean((string)($_POST['source'][$i] ?? ''), 200)];
         }
-        $c['services']['items'] = $items; $c['services']['verified'] = !empty($_POST['verified']); $c['services']['note'] = $s('note', 300); $save = true; break;
+        $c['services']['items'] = $items; $c['services']['verified'] = !empty($_POST['verified']); $c['services']['times_note'] = $s('note', 300); $save = true; break;
     case 'giving':
         $pb = preg_replace('/\D/', '', $s('paybill', 10));
         $c['giving'] = ['verified' => !empty($_POST['verified']) && $pb !== '', 'mpesa_paybill' => $pb, 'mpesa_account' => $s('account', 60), 'note' => $s('note', 400)]; $save = true; break;
@@ -84,13 +86,37 @@ switch ($act) {
         $save = true; break;
     case 'news_del':
         $k = (int)($_POST['i'] ?? -1); if (isset($c['news'][$k])) { array_splice($c['news'], $k, 1); $save = true; } break;
+    case 'photos':
+        foreach (($c['photos'] ?? []) as $k => $ph) {
+            $src = basename((string)($_POST['src'][$k] ?? ''));
+            $ok = $src !== '' && is_file(LCC_ROOT . '/assets/uploads/' . $src);
+            $c['photos'][$k]['src'] = $ok ? 'assets/uploads/' . $src : '';
+            $c['photos'][$k]['approved'] = $ok && !empty($_POST['approved'][$k]);
+            $c['photos'][$k]['desc'] = lcc_clean((string)($_POST['desc'][$k] ?? $ph['desc']), 160);
+        }
+        $save = true; break;
+    case 'contact':
+        foreach (['phone' => 30, 'email' => 120, 'street' => 120, 'postal' => 120] as $k => $max) { $c['contact'][$k] = $s($k, $max); }
+        $c['contact']['phone_intl'] = '+254' . substr(preg_replace('/\D/', '', $c['contact']['phone']), -9);
+        $save = true; break;
+    case 'ministry':
+        foreach (($c['ministries'] ?? []) as $k => $m) {
+            if (isset($_POST['text'][$k])) { $c['ministries'][$k]['text'] = lcc_clean((string)$_POST['text'][$k], 600); }
+        }
+        $c['ministries_note'] = $s('mnote', 400); $save = true; break;
+    case 'past_add':
+        if ($s('title') === '') { $flash = 'Title is required.'; break; }
+        array_unshift($c['past_events'], ['title' => $s('title', 140), 'when' => $s('when', 40), 'category' => $s('category', 40) ?: 'Event', 'summary' => $s('summary', 600), 'video' => $ytId($s('yt', 200))]);
+        $save = true; break;
+    case 'past_del':
+        $k = (int)($_POST['i'] ?? -1); if (isset($c['past_events'][$k])) { array_splice($c['past_events'], $k, 1); $save = true; } break;
     case 'sub_del':
         $f = basename($s('f', 80)); $p = LCC_PRIVATE . '/submissions/' . $f;
         if (preg_match('/^[0-9]{8}-[0-9]{6}-[a-f0-9]{16}\.json$/', $f) && is_file($p)) { unlink($p); $flash = 'Submission deleted.'; } break;
     case 'upload':
         $flash = handle_upload(); break;
 }
-if ($save) { $flash = lcc_write_content($c) ? 'Saved. Dynamic sections update straight away; run tools/build.py to refresh the pre-rendered pages for search engines.' : 'Could not save — check file permissions on data/content.json.'; }
+if ($save) { $flash = lcc_write_content($c) ? 'Saved. Run python3 tools/build.py on the server (or ask your web developer) to republish the pages; the notice, giving and sermon library update straight away.' : 'Could not save — check file permissions on data/content.json.'; }
 
 function handle_upload(): string {
     $f = $_FILES['img'] ?? null;
@@ -118,7 +144,25 @@ $t = lcc_e(lcc_csrf_token());
 $hid = function (string $a) use ($t) { return '<input type="hidden" name="csrf" value="' . $t . '"><input type="hidden" name="action" value="' . $a . '">'; };
 ob_start(); ?>
 <p class="bar"><?= $flash ? '<span class="ok">' . lcc_e($flash) . '</span>' : 'Signed in.' ?> <form method="post" style="display:inline"><?= $hid('logout') ?><button class="link">Sign out</button></form></p>
-<nav class="tabs"><a href="#notice">Notice</a><a href="#services">Services</a><a href="#giving">Giving</a><a href="#videos">Videos</a><a href="#events">Events</a><a href="#news">News</a><a href="#subs">Submissions</a><a href="#upload">Images</a></nav>
+<nav class="tabs"><a href="#photos">Photos</a><a href="#contact">Contact</a><a href="#ministries">Ministries</a><a href="#past">Past events</a><a href="#notice">Notice</a><a href="#services">Services</a><a href="#giving">Giving</a><a href="#videos">Videos</a><a href="#events">Events</a><a href="#news">News</a><a href="#subs">Submissions</a><a href="#upload">Images</a></nav>
+
+<section id="photos"><h2>Photo slots</h2><form method="post" class="box"><?= $hid('photos') ?>
+<p class="warn">Approve a photo only when the church owns it or has permission. Upload it under “Images” first, then pick it here. Until a slot is approved, the site shows LCC's own YouTube stills.</p>
+<?php $ups = array_map('basename', glob(LCC_ROOT . '/assets/uploads/*.{jpg,png,webp}', GLOB_BRACE) ?: []); foreach (($c['photos'] ?? []) as $k => $ph): ?>
+<div class="grid"><b><?= lcc_e($ph['slot']) ?></b><input name="desc[<?= (int)$k ?>]" value="<?= lcc_e($ph['desc']) ?>"><select name="src[<?= (int)$k ?>]"><option value="">— YouTube still (default) —</option><?php foreach ($ups as $u): ?><option <?= basename((string)$ph['src']) === $u ? 'selected' : '' ?>><?= lcc_e($u) ?></option><?php endforeach; ?></select><label class="row"><input type="checkbox" name="approved[<?= (int)$k ?>]" <?= !empty($ph['approved']) ? 'checked' : '' ?>> Approved</label></div>
+<?php endforeach; ?><button>Save photos</button></form></section>
+
+<section id="contact"><h2>Contact details</h2><form method="post" class="box"><?= $hid('contact') ?>
+<?php foreach (['phone' => 'Phone', 'email' => 'Email', 'street' => 'Street', 'postal' => 'Postal address'] as $k => $l): ?><label><?= $l ?><input name="<?= $k ?>" value="<?= lcc_e($c['contact'][$k] ?? '') ?>"></label><?php endforeach; ?><button>Save</button></form></section>
+
+<section id="ministries"><h2>Ministries</h2><form method="post" class="box"><?= $hid('ministry') ?>
+<?php foreach (($c['ministries'] ?? []) as $k => $m): ?><label><?= lcc_e($m['name']) ?><textarea name="text[<?= (int)$k ?>]"><?= lcc_e($m['text']) ?></textarea></label><?php endforeach; ?>
+<label>Note under ministries<input name="mnote" value="<?= lcc_e($c['ministries_note'] ?? '') ?>"></label><button>Save</button></form></section>
+
+<section id="past"><h2>Past events archive</h2><form method="post" class="box"><?= $hid('past_add') ?>
+<div class="grid"><input name="title" placeholder="Title" required><input name="when" placeholder="When, e.g. December 2026"><input name="category" placeholder="Category"><input name="yt" placeholder="YouTube link (optional)"></div>
+<label>Summary<textarea name="summary"></textarea></label><button>Add past event</button></form>
+<table><?php foreach (($c['past_events'] ?? []) as $i => $ev): ?><tr><td><?= lcc_e($ev['title']) ?></td><td><?= lcc_e($ev['when']) ?></td><td><form method="post"><?= $hid('past_del') ?><input type="hidden" name="i" value="<?= (int)$i ?>"><button class="link">Remove</button></form></td></tr><?php endforeach; ?></table></section>
 
 <section id="notice"><h2>Notice bar</h2><form method="post" class="box"><?= $hid('notice') ?>
 <label class="row"><input type="checkbox" name="show" <?= !empty($c['notice']['show']) ? 'checked' : '' ?>> Show notice bar</label>
@@ -127,9 +171,9 @@ ob_start(); ?>
 
 <section id="services"><h2>Service times</h2><form method="post" class="box"><?= $hid('services') ?>
 <?php foreach (array_merge($c['services']['items'] ?? [], [['name' => '', 'day' => '', 'time' => '', 'detail' => '']]) as $it): ?>
-<div class="grid"><input name="name[]" placeholder="Name" value="<?= lcc_e($it['name']) ?>"><input name="day[]" placeholder="Day" value="<?= lcc_e($it['day']) ?>"><input name="time[]" placeholder="Time" value="<?= lcc_e($it['time']) ?>"><input name="detail[]" placeholder="Detail" value="<?= lcc_e($it['detail']) ?>"></div>
+<div class="grid"><input name="name[]" placeholder="Name" value="<?= lcc_e($it['name']) ?>"><input name="day[]" placeholder="Day" value="<?= lcc_e($it['day']) ?>"><input name="time[]" placeholder="Time" value="<?= lcc_e($it['time']) ?>"><input name="detail[]" placeholder="Detail" value="<?= lcc_e($it['detail']) ?>"><select name="status[]"><option value="confirmed" <?= ($it['status'] ?? '') === 'confirmed' ? 'selected' : '' ?>>Confirmed</option><option value="reported" <?= ($it['status'] ?? '') !== 'confirmed' ? 'selected' : '' ?>>Needs confirmation</option></select><input name="watch[]" placeholder="YouTube link (https)" value="<?= lcc_e($it['watch'] ?? '') ?>"><input name="source[]" placeholder="Source" value="<?= lcc_e($it['source'] ?? '') ?>"></div>
 <?php endforeach; ?>
-<label>Note shown while unconfirmed<input name="note" value="<?= lcc_e($c['services']['note'] ?? '') ?>"></label>
+<label>Note shown while times are unconfirmed<input name="note" value="<?= lcc_e($c['services']['times_note'] ?? '') ?>"></label>
 <label class="row"><input type="checkbox" name="verified" <?= !empty($c['services']['verified']) ? 'checked' : '' ?>> These times are confirmed by the church office</label><button>Save</button></form></section>
 
 <section id="giving"><h2>Giving</h2><form method="post" class="box"><?= $hid('giving') ?>
