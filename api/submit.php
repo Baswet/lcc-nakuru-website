@@ -9,12 +9,12 @@ if (!empty($_POST['website'])) { lcc_json(200, ['ok' => true]); } // honeypot: s
 $cfg = lcc_config();
 if (!lcc_rate_ok('submit', (int)($cfg['max_per_hour'] ?? 5))) { lcc_json(429, ['error' => 'Too many messages from this connection. Please try again later or call 0722 864 864.']); }
 
-$type = ($_POST['type'] ?? '') === 'prayer' ? 'prayer' : 'contact';
+$type = in_array($_POST['type'] ?? '', ['prayer', 'visit'], true) ? $_POST['type'] : 'contact';
 $name = lcc_clean((string)($_POST['name'] ?? ''), 100);
 $reply = lcc_clean((string)($_POST['reply'] ?? ''), 120);
 $msg = lcc_clean((string)($_POST['message'] ?? ''), 3000);
 if ($msg === '') { lcc_json(422, ['error' => 'Please write a message.']); }
-if ($type === 'contact' && ($name === '' || $reply === '')) { lcc_json(422, ['error' => 'Please give your name and an email or phone number.']); }
+if ($type !== 'prayer' && ($name === '' || $reply === '')) { lcc_json(422, ['error' => 'Please give your name and an email or phone number.']); }
 if ($type === 'prayer' && empty($_POST['consent'])) { lcc_json(422, ['error' => 'Please tick the consent box.']); }
 
 $rec = ['id' => bin2hex(random_bytes(8)), 'type' => $type, 'received' => date('c'), 'name' => $name, 'reply' => $reply, 'message' => $msg, 'read' => false];
