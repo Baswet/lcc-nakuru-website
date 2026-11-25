@@ -1,0 +1,465 @@
+{
+ "_note": "Single source of truth for the LCC website. Edit via /admin (PHP hosting) or by hand, then run tools/build.py. Only publish verified facts.",
+ "site": {
+  "name": "Life Celebration Centre",
+  "short": "LCC Nakuru",
+  "org": "Deliverance Church International – Life Celebration Centre (LCC), Nakuru",
+  "url": "https://baswet.github.io/lcc-nakuru-website/",
+  "vision": "Transforming Nations for Christ",
+  "mission": "Life Celebration Centre exists to reconcile people to God, equip them for Ministry to God and the people with a transformative agenda.",
+  "locale": "en_KE"
+ },
+ "contact": {
+  "phone": "0722 864 864",
+  "phone_intl": "+254722864864",
+  "email": "lccnakuru@yahoo.com",
+  "street": "General Kariba Street, Freehold",
+  "city": "Nakuru",
+  "postal": "P.O. Box 2758-20100, Nakuru",
+  "country": "KE",
+  "maps_query": "Deliverance Church Nakuru Kariba Street"
+ },
+ "social": {
+  "youtube": "https://www.youtube.com/@DeliveranceChurchLCC",
+  "youtube_live": "https://www.youtube.com/@DeliveranceChurchLCC/streams",
+  "facebook": "https://www.facebook.com/LifeCelebrationCentre",
+  "instagram": "https://www.instagram.com/lccnakuru/"
+ },
+ "services": {
+  "verified": false,
+  "note": "Sunday service times are being confirmed with the church office. Please call 0722 864 864 before your first visit.",
+  "items": [
+   {
+    "name": "Sunday Services",
+    "day": "Sunday",
+    "time": "Times being confirmed",
+    "detail": "Multiple services (a Second Service is streamed on YouTube)"
+   },
+   {
+    "name": "Youth Ablaze",
+    "day": "Youth night of worship",
+    "time": "Dates announced on Facebook",
+    "detail": "Worship night for young people"
+   },
+   {
+    "name": "Morning Devotion",
+    "day": "Start of the week",
+    "time": "Shared online",
+    "detail": "Devotional encouragement"
+   }
+  ]
+ },
+ "giving": {
+  "verified": false,
+  "mpesa_paybill": "",
+  "mpesa_account": "",
+  "note": "Verified giving details will be published here once confirmed by the LCC church office. To give today, please give in person during a service or call the church office on 0722 864 864."
+ },
+ "leadership": [
+  {
+   "name": "Rev. Elijah Mwangi",
+   "role": "Lead Pastor",
+   "bio": "Rev. Elijah Mwangi leads Life Celebration Centre and convenes the annual Cutting Edge Conference. His messages are shared weekly on the LCC YouTube channel.",
+   "verified": true
+  }
+ ],
+ "ministries": [
+  {
+   "name": "One Accord Ministers",
+   "kind": "Worship",
+   "text": "LCC's worship ministers, whose covers of songs such as “Adonai”, “U Mwema” and “Worthy is the Lamb” are shared on our YouTube channel.",
+   "video": "2zIbRK7eDNw"
+  },
+  {
+   "name": "Youth Ablaze",
+   "kind": "Youth",
+   "text": "A night of worship for young people. Dates are announced on our Facebook page."
+  },
+  {
+   "name": "Morning Devotion",
+   "kind": "Devotion",
+   "text": "Short devotional encouragement to start the week, shared online."
+  },
+  {
+   "name": "CityAnnex",
+   "kind": "Outreach",
+   "text": "Featured in our social media highlights. Details to be confirmed by the church office."
+  },
+  {
+   "name": "Cutting Edge Conference",
+   "kind": "Equipping",
+   "text": "Our annual international conference for ministers and believers, convened by Rev. Elijah Mwangi.",
+   "link": "conference.html"
+  }
+ ],
+ "events": [
+  {
+   "slug": "cutting-edge-2027",
+   "title": "Cutting Edge Conference 2027",
+   "start": "2027-03-30",
+   "end": "2027-04-04",
+   "place": "Deliverance Church LCC, Kariba Road, Freehold, Nakuru",
+   "summary": "Theme: Commissioning for the Global Mission. With Rev. Elijah Mwangi (convener), Bishop Steve Kamau (USA), Bishop Darnell Williams (USA) and Rev. George Macharia (Kenya).",
+   "url": "conference.html",
+   "external": "https://cuttingedgeconference.co.ke/form/conference-delegates-registration-2027/",
+   "featured": true
+  }
+ ],
+ "conference": {
+  "name": "Cutting Edge Conference 2027",
+  "dates": "30 March – 4 April 2027",
+  "theme": "Commissioning for the Global Mission",
+  "site": "https://cuttingedgeconference.co.ke/",
+  "register": "https://cuttingedgeconference.co.ke/form/conference-delegates-registration-2027/",
+  "volunteer": "https://cuttingedgeconference.co.ke/form/volunteer-inquiry-form-for-the-cutting-edge-conference-2027/",
+  "partner": "https://cuttingedgeconference.co.ke/form/partner-application-for-church-conference/",
+  "email": "inquiry@cuttingedgeconference.co.ke",
+  "phone": "+254 722 864 864",
+  "speakers": [
+   {
+    "name": "Rev. Elijah Mwangi",
+    "from": "Convener · Kenya"
+   },
+   {
+    "name": "Bishop Steve Kamau",
+    "from": "USA"
+   },
+   {
+    "name": "Bishop Darnell Williams",
+    "from": "USA"
+   },
+   {
+    "name": "Rev. George Macharia",
+    "from": "Kenya"
+   }
+  ],
+  "programme": [
+   {
+    "day": "Day 1 · Tuesday",
+    "time": "9:00am – 4:00pm",
+    "what": "Evangelism"
+   },
+   {
+    "day": "Days 2–5 · Wednesday – Saturday",
+    "time": "Session 1, 9:00 – 10:30am",
+    "what": "Teaching and preaching"
+   },
+   {
+    "day": "Day 6 · Sunday",
+    "time": "9:00am – 2:00pm",
+    "what": "Closing Sunday"
+   }
+  ],
+  "options": [
+   "Day delegate",
+   "Boarding delegate"
+  ],
+  "videos": [
+   "65xaXc3ghw8",
+   "ghcoCshX5V4",
+   "DGPS3RwhIGM"
+  ]
+ },
+ "news": [
+  {
+   "slug": "55-trees",
+   "date": "2025-11",
+   "title": "55 Trees for 55 Years",
+   "summary": "Deliverance Church marked its anniversary by planting 55 trees, one for every year. Watch the celebration on YouTube.",
+   "video": "rGfE1rDVY2M"
+  },
+  {
+   "slug": "rejesha-live",
+   "date": "2025",
+   "title": "“Rejesha” — Njoki Munyi live at LCC",
+   "summary": "Gospel artist Njoki Munyi's live performance of “Rejesha” at LCC Nakuru, one of the most-watched videos on our channel.",
+   "video": "sX7Zg6QeATU"
+  },
+  {
+   "slug": "cutting-edge-2027-announced",
+   "date": "2026",
+   "title": "Cutting Edge Conference 2027 dates announced",
+   "summary": "The conference returns 30 March – 4 April 2027 under the theme “Commissioning for the Global Mission”. Registration is open on the official conference website.",
+   "link": "conference.html"
+  }
+ ],
+ "notice": {
+  "show": true,
+  "text": "Cutting Edge Conference 2027 · 30 Mar – 4 Apr · Registration open",
+  "link": "conference.html"
+ },
+ "videos": [
+  {
+   "id": "vttJO-PLggk",
+   "title": "The River of God",
+   "full_title": "The River of God | Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "4 months ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "2zIbRK7eDNw",
+   "title": "Adonai by VVC Tanzania Ft Herman Mchome | Cover by One Accord Ministers",
+   "full_title": "Adonai by VVC Tanzania Ft Herman Mchome | Cover by One Accord Ministers",
+   "speaker": "One Accord Ministers",
+   "category": "worship",
+   "published": "6 months ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "qOhe1RXXToc",
+   "title": "U Mwema by Jane Aller | Cover by One Accord Ministers",
+   "full_title": "U Mwema by Jane Aller | Cover by One Accord Ministers",
+   "speaker": "One Accord Ministers",
+   "category": "worship",
+   "published": "6 months ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "3OSTueEP-Gw",
+   "title": "Sijaona kama wewe by Patrick Kubuya || Cover by One Accord Ministers",
+   "full_title": "Sijaona kama wewe by Patrick Kubuya || Cover by One Accord Ministers",
+   "speaker": "One Accord Ministers",
+   "category": "worship",
+   "published": "8 months ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "cccPkZoCXbo",
+   "title": "Worthy is the lamb- Cover by One Accord Ministers",
+   "full_title": "Worthy is the lamb- Cover by One Accord Ministers",
+   "speaker": "One Accord Ministers",
+   "category": "worship",
+   "published": "9 months ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "vOY1KQTa7A0",
+   "title": "Embracing the Call, Advancing the Mission",
+   "full_title": "Embracing the Call, Advancing the Mission || Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "10 months ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "tgqyS7zYU_c",
+   "title": "Prisoner of Hope by a Better a Covenant",
+   "full_title": "Prisoner of Hope by a Better a Covenant",
+   "speaker": "",
+   "category": "worship",
+   "published": "10 months ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "oUJJW5hbbJo",
+   "title": "Holy Forever by Jenn Johnson | Cover by Shalom",
+   "full_title": "Holy Forever by Jenn Johnson | Cover by Shalom",
+   "speaker": "Shalom",
+   "category": "worship",
+   "published": "10 months ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "rGfE1rDVY2M",
+   "title": "55 Trees for 55 Years! | Deliverance Church Anniversary Celebration",
+   "full_title": "55 Trees for 55 Years! | Deliverance Church Anniversary Celebration",
+   "speaker": "",
+   "category": "story",
+   "published": "1 year ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "TuJcg0iC5sQ",
+   "title": "The Help of God",
+   "full_title": "The Help of God || Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "1 year ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "ZvREFuip7hA",
+   "title": "The Pathway to your Destiny Helpers",
+   "full_title": "The Pathway to your Destiny Helpers || Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "1 year ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "AitUH2CcbnE",
+   "title": "Do not Be Drunk with Wine!",
+   "full_title": "Do not Be Drunk with Wine! Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "1 year ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "eE_rz1OSs_s",
+   "title": "Do Not Despise your Birthright",
+   "full_title": "Do Not Despise your Birthright | Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "1 year ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "ltp300rJmnM",
+   "title": "Enough is Enough!",
+   "full_title": "Enough is Enough! Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "1 year ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "sX7Zg6QeATU",
+   "title": "REJESHA - Njoki Munyi | Live Performance at LCC- Nakuru",
+   "full_title": "REJESHA - Njoki Munyi | Live Performance at LCC- Nakuru",
+   "speaker": "Njoki Munyi",
+   "category": "worship",
+   "published": "1 year ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "DGPS3RwhIGM",
+   "title": "Being on the Cutting Edge Part 2",
+   "full_title": "Being on the Cutting Edge Part 2 Pastor George Macharia",
+   "speaker": "Pastor George Macharia",
+   "category": "conference",
+   "published": "2 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "ghcoCshX5V4",
+   "title": "Being on the Cutting Edge | Part 1",
+   "full_title": "Being on the Cutting Edge | Part 1 | Pastor George Macharia",
+   "speaker": "Pastor George Macharia",
+   "category": "conference",
+   "published": "2 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "65xaXc3ghw8",
+   "title": "Cutting Edge Conference 2024 | Opening Session",
+   "full_title": "Cutting Edge Conference 2024 | Opening Session | Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "conference",
+   "published": "2 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "1f_BBA3b684",
+   "title": "God's Love",
+   "full_title": "God's Love | Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "2 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "BDFK7m58EBA",
+   "title": "The Christ Who Took Our Place and Shared His Place",
+   "full_title": "The Christ Who Took Our Place and Shared His Place | Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "2 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "XlCoUxsN6Dg",
+   "title": "Strengthened to Conquer",
+   "full_title": "Strengthened to Conquer with Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "2 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "6ZqHtyQV9pA",
+   "title": "Faith to Action",
+   "full_title": "Faith to Action || Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "2 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "TkoVW73yBrg",
+   "title": "Reasons for Everything",
+   "full_title": "Reasons for Everything | Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "2 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "-JAiC8nYsDA",
+   "title": "The God of Miracles, Signs & Wonders",
+   "full_title": "The God of Miracles, Signs & Wonders || Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "UuLhgFCbiQM",
+   "title": "Times of Being at the Crossroad",
+   "full_title": "Times of Being at the Crossroad || Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "OBXrRvD6cVk",
+   "title": "Overcoming the Spirit of Fear",
+   "full_title": "Overcoming the Spirit of Fear || Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "vBVXP3gDoG4",
+   "title": "Come to Me All that Labor",
+   "full_title": "Come to Me All that Labor || Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "VwAcz4RNStg",
+   "title": "The God of Increase",
+   "full_title": "The God of Increase || Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "Bm5xRJfGcLo",
+   "title": "Do not Settle for a Life Without Favor",
+   "full_title": "Do not Settle for a Life Without Favor || Rev Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "am7hxyJ8Ahc",
+   "title": "Know your Grace",
+   "full_title": "Know your Grace || Pastor Gabriel Ngugi",
+   "speaker": "Pastor Gabriel Ngugi",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "20Fv5KWwnww",
+   "title": "Rehema Simfukwe – Neema Yako - Cover by One Accord Ministers",
+   "full_title": "Rehema Simfukwe – Neema Yako - Cover by One Accord Ministers",
+   "speaker": "One Accord Ministers",
+   "category": "worship",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "E5UT3fJ7N5M",
+   "title": "Crossing Over Gilgal a Place of Circumcisions",
+   "full_title": "Crossing Over Gilgal a Place of Circumcisions Bruce Oliver",
+   "speaker": "Bruce Oliver",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "VKZc-8WNaCA",
+   "title": "Walking in the Light",
+   "full_title": "Walking in the Light- Bishop Todd TownSend",
+   "speaker": "Bishop Todd TownSend",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  },
+  {
+   "id": "SmBnQ3R7WYE",
+   "title": "Three Dimensions of Mercy",
+   "full_title": "Three Dimensions of Mercy || Rev. Elijah Mwangi",
+   "speaker": "Rev. Elijah Mwangi",
+   "category": "sermon",
+   "published": "3 years ago (as of 25 Nov 2026)"
+  }
+ ]
+}
