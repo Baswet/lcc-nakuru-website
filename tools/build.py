@@ -37,9 +37,11 @@ def kente():
     return f'<div class="wrap" aria-hidden="true">{KENTE}</div>'
 
 
-def yt_img(vid, alt="", lazy=True, cls=""):
+def yt_img(vid, alt="", lazy=True, cls="", frame=None):
+    """frame=None: the video's own thumbnail (for video cards). frame=1..3: a real frame captured inside the video (for photography)."""
     vid = e(vid)
-    return (f'<img src="https://i.ytimg.com/vi/{vid}/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" '
+    hi, lo = (f"maxres{frame}", f"hq{frame}") if frame else ("maxresdefault", "hqdefault")
+    return (f'<img src="https://i.ytimg.com/vi/{vid}/{hi}.jpg" data-fallback="https://i.ytimg.com/vi/{vid}/{lo}.jpg" '
             f'alt="{e(alt)}" width="1280" height="720" loading="{"lazy" if lazy else "eager"}" decoding="async"{f" class={cls}" if cls else ""}>')
 
 
@@ -77,7 +79,7 @@ def photo_slot(slot):
     v = VID.get((p or {}).get("fallback_video", ""), None)
     if not v:
         return "", ""
-    return yt_img(v["id"], f'Still from LCC YouTube stream: {v["title"]}'), f'https://www.youtube.com/watch?v={v["id"]}'
+    return yt_img(v["id"], p["desc"] + " (frame from LCC's YouTube stream)", frame=p.get("frame", 2)), f'https://www.youtube.com/watch?v={v["id"]}'
 
 
 def rail(title, items, rid, eyebrow="", more=None):
@@ -220,7 +222,7 @@ def this_sunday():
 
 def ecard(ev, past=True, href=None):
     v = VID.get(ev.get("video"))
-    img = yt_img(v["id"], "") if v else ""
+    img = yt_img(v["id"], "", frame=2) if v else ""
     href = href or ev_slug(ev)
     return (f'<article class="ecard"><div class="frame">{img}<span class="vdate">{e(ev["when"])}</span>{"<span class=past>Past event</span>" if past else ""}</div>'
             f'<div class="body"><span class="cat">{e(ev["category"])}</span><h3><a href="{e(href)}">{e(ev["title"])}</a></h3><p>{e(ev["summary"])}</p>'
@@ -256,7 +258,7 @@ def discover_grid():
     out = []
     for m in C["ministries"]:
         href = m.get("link") or f'ministries.html#{m["slug"]}'
-        img = yt_img(m["video"], "") if m.get("video") else ""
+        img = yt_img(m["video"], "", frame=2) if m.get("video") else ""
         out.append(f'<a href="{e(href)}">{img}<small>{e(m["kind"])}</small><b>{e(m["name"])}</b><span>Discover →</span></a>')
     return '<div class="discover">' + "".join(out) + '</div>'
 
@@ -265,7 +267,7 @@ def collage(items, group=None):
     out = []
     for v, cat in items:
         out.append(f'<figure data-cat="{e(cat)}"><button type="button" data-lightbox="{e(v["id"])}" data-group="{e(group or "all")}" data-title="{e(v["title"])}" aria-label="Open: {e(v["title"])}">'
-                   f'{yt_img(v["id"], "")}<figcaption>{e(v["title"])}<small>{e(cat)} · {e(v.get("published",""))}</small></figcaption></button></figure>')
+                   f'{yt_img(v["id"], "", frame=2)}<figcaption>{e(v["title"])}<small>{e(cat)} · {e(v.get("published",""))}</small></figcaption></button></figure>')
     return '<div class="collage">' + "".join(out) + '</div>'
 
 
@@ -290,7 +292,7 @@ f"""
    <div class="actions"><a class="btn btn-solid" href="visit.html">Plan your visit</a><a class="btn" href="watch.html">Watch latest service</a><a class="btn" href="about.html">Discover LCC</a></div>
   </div>
   <figure class="video" style="margin:0">
-   <div class="frame" style="aspect-ratio:4/5;border-radius:var(--r)">{yt_img(hero_v["id"], "", lazy=False)}<button class="play" type="button" data-yt="{e(hero_v['id'])}" aria-label="Play video: {e(hero_v['title'])}"></button></div>
+   <div class="frame" style="aspect-ratio:4/5;border-radius:var(--r)">{yt_img(hero_v["id"], "Worship team leading the Sunday service at LCC (frame from the stream)", lazy=False, frame=2)}<button class="play" type="button" data-yt="{e(hero_v['id'])}" aria-label="Play video: {e(hero_v['title'])}"></button></div>
    <figcaption><small>Latest from LCC · {e(hero_v["title"])} · {e(hero_v["published"])}</small></figcaption>
   </figure>
  </section>
@@ -336,8 +338,8 @@ f"""
 
 <section class="sec" aria-labelledby="mom-h"><div class="wrap">
  <div class="sec-head"><div><span class="eyebrow">LCC Moments</span><h2 id="mom-h">Church life, captured</h2></div><a class="btn" href="gallery.html">Open the gallery</a></div>
- <div class="moments">{''.join(f'<div class="m">{yt_img(v["id"], "")}<a href="gallery.html">{e(v["title"])}</a></div>' for v,_ in [MOMENTS[1], MOMENTS[4], MOMENTS[7], MOMENTS[10], MOMENTS[11]])}</div>
- <p class="credit">Stills from LCC's own YouTube streams. Approved church photography will replace these as it becomes available.</p>
+ <div class="moments">{''.join(f'<div class="m">{yt_img(v["id"], "", frame=2)}<a href="gallery.html">{e(v["title"])}</a></div>' for v,_ in [MOMENTS[1], MOMENTS[4], MOMENTS[7], MOMENTS[10], MOMENTS[11]])}</div>
+ <p class="credit">Moments captured from LCC's own YouTube streams. Approved church photography will be added as it becomes available.</p>
 </div></section>
 
 {mission_band()}
@@ -348,7 +350,7 @@ f"""
 </div></section>
 
 <section class="sec"><div class="wrap">
- <div class="invite">{yt_img(latest_services[0]["id"], "")}
+ <div class="invite">{yt_img("I-Zw0aavDF4", "", frame=1)}
   <span class="eyebrow">Come and experience LCC</span><h2>There's a seat for you this Sunday.</h2>
   <p class="lead" style="color:#E6DCCF">General Kariba Street, Freehold, Nakuru · First &amp; Second Service · Times being confirmed — call {e(CT['phone'])}</p>
   <p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-sun" href="visit.html">Plan your visit</a><a class="btn btn-ghost-light" href="{maps_url()}" rel="noopener" target="_blank">Get directions</a></p>
@@ -361,7 +363,7 @@ slides = []
 for i, sl in enumerate([p for p in C["photos"] if p["slot"].startswith("about-hero")]):
     img, link = photo_slot(sl["slot"])
     v = VID.get(sl["fallback_video"])
-    cap = f'<a href="{e(link)}" rel="noopener" target="_blank">Still from LCC stream · {e(v["title"])} ↗</a>' if link else e(sl["desc"])
+    cap = f'<a href="{e(link)}" rel="noopener" target="_blank">{e(sl["desc"])} · watch ↗</a>' if link else e(sl["desc"])
     slides.append(f'<figure class="slide{" on" if i == 0 else ""}" data-cap="{e(cap)}" aria-hidden="{"false" if i == 0 else "true"}">{img}</figure>')
 caps0 = slides and re.search(r'data-cap="([^"]*)"', slides[0]).group(1)
 
@@ -384,7 +386,7 @@ f"""
 </div></nav>
 
 <section class="sec" id="story" aria-labelledby="story-h"><div class="wrap split">
- <div class="layered"><div class="a">{photo_slot("about-hero-2")[0]}</div><div class="b">{photo_slot("about-hero-3")[0]}</div></div>
+ <div class="layered"><div class="a">{photo_slot("story-a")[0]}</div><div class="b">{photo_slot("story-b")[0]}</div></div>
  <div>
   <span class="num">01 — The story of LCC</span>
   <h2 id="story-h" class="mt2">A Nakuru church with a <em>global</em> heart.</h2>
@@ -418,7 +420,7 @@ f"""
  <div class="sec-head"><div><span class="num">05 — Our church family</span><h2 id="family-h" class="mt2">Worship, fellowship and <em>connection</em></h2></div><a class="btn" href="gallery.html">Explore LCC Moments</a></div>
  <p class="lead" style="max-width:60ch">{e(C['about']['family'])}</p>
  <div class="mt4">{collage(MOMENTS[:9], "family")}</div>
- <p class="credit">Stills from LCC's own YouTube streams — select any to watch. Church photography (Facebook albums) awaits the church office's approval.</p>
+ <p class="credit">Moments captured from LCC's own YouTube streams — select any to watch. Church photography (Facebook albums) awaits the church office's approval.</p>
 </div></section>
 
 <section class="sec" id="leadership" aria-labelledby="lead-h"><div class="wrap portrait">
@@ -450,7 +452,7 @@ f"""
 <section class="sec" id="events" aria-labelledby="e-h"><div class="wrap">
  <div class="sec-head"><div><span class="num">09 — Events</span><h2 id="e-h" class="mt2">Gatherings that mark our year</h2></div><a class="btn" href="events.html">All events</a></div>
  <h3>Upcoming</h3>
- <div class="ecards mt2">{''.join(f'<article class="ecard"><div class="frame">{yt_img(CF["videos"][0], "")}<span class="vdate">{e(fmt_range(ev["start"], ev["end"]))}</span></div><div class="body"><span class="cat">{e(ev["category"])}</span><h3><a href="conference.html">{e(ev["title"])}</a></h3><p>{e(CF["theme"])}</p><a href="conference.html">View event →</a></div></article>' for ev in up_ev)}</div>
+ <div class="ecards mt2">{''.join(f'<article class="ecard"><div class="frame">{yt_img("GOjZxrPfljE", "", frame=1)}<span class="vdate">{e(fmt_range(ev["start"], ev["end"]))}</span></div><div class="body"><span class="cat">{e(ev["category"])}</span><h3><a href="conference.html">{e(ev["title"])}</a></h3><p>{e(CF["theme"])}</p><a href="conference.html">View event →</a></div></article>' for ev in up_ev)}</div>
  <h3 class="mt4">Past events</h3>
  <div class="ecards mt2">{''.join(ecard(ev) for ev in PAST[:6])}</div>
 </div></section>
@@ -472,7 +474,7 @@ f"""
 </div></section>
 
 <section class="sec" id="visit"><div class="wrap">
- <div class="invite">{yt_img(latest_services[1]["id"], "")}
+ <div class="invite">{yt_img("GOjZxrPfljE", "", frame=2)}
   <span class="eyebrow">12 — Come and experience LCC</span><h2>Celebrate life with us this Sunday.</h2>
   <p class="lead" style="color:#E6DCCF">First &amp; Second Service · General Kariba Street, Freehold, Nakuru · Times being confirmed — call {e(CT['phone'])}</p>
   <p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-sun" href="visit.html">Plan your visit</a><a class="btn btn-ghost-light" href="watch.html">Watch online</a><a class="btn btn-ghost-light" href="contact.html">Contact LCC</a><a class="btn btn-ghost-light" href="{maps_url()}" rel="noopener" target="_blank">Map</a></p>
@@ -708,7 +710,7 @@ f"""
 <section class="sec"><div class="wrap">
  <div class="filters gallery-f" role="group" aria-label="Filter moments"><button class="chip" type="button" data-gfilter="all" aria-pressed="true">All</button>{''.join(f'<button class="chip" type="button" data-gfilter="{e(c)}" aria-pressed="false">{e(c)}</button>' for c in ["Sunday services","Praise & worship","Conferences","Special nights"])}</div>
  {collage(gcats, "gallery")}
- <div class="notice mt4"><b>About these images</b>These are stills from LCC's own YouTube streams. The church's Facebook photo albums (fellowship, Leaders' Summit, Sunday services) are catalogued and will appear here once the church office approves them for the website.</div>
+ <div class="notice mt4"><b>About these images</b>These are moments captured from LCC's own YouTube streams. The church's Facebook photo albums (fellowship, Leaders' Summit, Sunday services) are catalogued and will appear here once the church office approves them for the website.</div>
 </div></section>
 """)
 
@@ -752,7 +754,7 @@ f"""
   <p><b>Visit</b><br>{e(CT['street'])}, {e(CT['city'])}<br>{e(CT['postal'])}<br><a href="{maps_url()}" rel="noopener" target="_blank">Open in Google Maps</a></p>
   <p><b>Online</b><br><a href="{e(SO['facebook'])}" rel="noopener" target="_blank">Facebook</a> · <a href="{e(SO['youtube'])}" rel="noopener" target="_blank">YouTube</a> · <a href="{e(SO['instagram'])}" rel="noopener" target="_blank">Instagram</a></p>
   <p class="credit">WhatsApp: no official WhatsApp number has been published, so none is listed.</p>
-  <div class="invite mt4" style="padding:28px">{yt_img(latest_services[0]["id"], "")}<span class="eyebrow">Prayer corner</span><h2 style="font-size:32px">You don't have to carry it alone.</h2><p style="color:#E6DCCF">Send a private prayer request — it is never published and is read only by the LCC pastoral team.</p><a class="btn btn-sun" href="#prayer">Send a prayer request</a></div>
+  <div class="invite mt4" style="padding:28px">{yt_img("I-Zw0aavDF4", "", frame=2)}<span class="eyebrow">Prayer corner</span><h2 style="font-size:32px">You don't have to carry it alone.</h2><p style="color:#E6DCCF">Send a private prayer request — it is never published and is read only by the LCC pastoral team.</p><a class="btn btn-sun" href="#prayer">Send a prayer request</a></div>
  </div>
  <div>
   <form class="form" id="message" action="api/submit.php" method="post" data-form="contact" novalidate>
