@@ -65,7 +65,8 @@ The full inventory is in `research/lcc-photography/asset-inventory.md`.
 
 - **Official logo:** only the Deliverance Church International emblem (Facebook profile image) was found. There is **no LCC-specific logo file**. The site uses a temporary text wordmark, **marked for approval**.
 - **LCC photographs:** 42 Facebook photos were catalogued by ID with intended placements. They are **awaiting approval and not republished**: your briefs say public visibility is not permission.
-- **Videos:** **65 official LCC videos** are used through privacy-enhanced YouTube embeds. YouTube stills are the visual material, and each one links to its own video.
+- **Videos:** **65 official LCC videos** are used through privacy-enhanced YouTube embeds.
+- **Photography from LCC's own streams:** YouTube automatically captures real frames inside each video (maxres1–3, 1280×720): congregations worshipping, worship teams, Praise Express, Kesha, conference worship. These are used wherever the design needs photography (About slideshow, story, collage, LCC Moments, ministry and event cards, invitations), each linked to its source video. Video cards keep the channel's own thumbnails.
 - **Stock images:** **none used.**
 - **Approval-ready:** every photo slot (About slideshow, story images) reads from `content.json → photos[]`. In admin, upload a photo, choose it for the slot, tick "Approved" and rebuild. The real image then replaces the YouTube still with no redesign.
 
