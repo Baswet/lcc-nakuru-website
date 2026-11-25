@@ -44,6 +44,8 @@ These are all LCC-owned and published by the page. **None are republished on the
 
 Thumbnails are loaded from YouTube's image servers (i.ytimg.com) and always link to their own video.
 
+**In-video frames (photography):** YouTube's automatically captured frames (`maxres1/2/3.jpg`, 1280×720) show real LCC moments without the poster text of custom thumbnails. They are used for the About slideshow (I-Zw0aavDF4/1, GOjZxrPfljE/2, iHh3K3p36Y8/2, dSnGjBfdnkI/2, co-4DGlDzXQ/2), the story images, collage, Moments, cards and invitations. Status: **IN USE (embed context, linked to source video)**. Replace them with approved photographs when available.
+
 ## 4. Stock and supplementary imagery
 None is used. The site uses designed, labelled placeholders and real YouTube stills, so no stock photo could be mistaken for LCC's people or building.
 
