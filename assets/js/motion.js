@@ -107,8 +107,13 @@
       en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('on'); io.unobserve(x.target); } });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
     targets.forEach(function (t) { io.observe(t); });
-    // Safety net: anything still hidden after 4s (e.g. printed, or observer quirks) becomes visible
-    setTimeout(function () { targets.forEach(function (t) { var r = t.getBoundingClientRect(); if (r.top < innerHeight) t.classList.add('on'); }); }, 4000);
+    // First screen never waits for the observer: reveal it on load (animations still play).
+    // This also covers background tabs / hidden panes where the viewport reports 0x0.
+    var fold = Math.max(innerHeight || 0, 900);
+    requestAnimationFrame(function () { targets.forEach(function (t) { if (t.getBoundingClientRect().top < fold) { t.classList.add('on'); io.unobserve(t); } }); });
+    // Safety net: if the page was opened hidden, reveal everything once it is shown; and after 4s anything above the fold.
+    if (!innerHeight) { var showAll = function () { targets.forEach(function (t) { t.classList.add('on'); }); }; d.addEventListener('visibilitychange', showAll, { once: true }); addEventListener('resize', showAll, { once: true }); }
+    setTimeout(function () { targets.forEach(function (t) { var r = t.getBoundingClientRect(); if (r.top < Math.max(innerHeight, 900)) t.classList.add('on'); }); }, 4000);
   }
 
   /* ---------- One rAF scroll loop for ink, parallax, pin, expand, scenes ---------- */
