@@ -988,7 +988,7 @@
    "fb": "1430313902585288",
    "desc": "Praise Express Service: joyful worship",
    "approved": true,
-   "src": "assets/photos/praise-express-worshipper-640.jpg",
+   "src": "assets/photos/praise-express-worshipper-938.jpg",
    "fallback_video": "I-Zw0aavDF4",
    "frame": 1,
    "slug": "praise-express-worshipper"
@@ -1060,7 +1060,8 @@
    "slug": "praise-express-worshipper",
    "src": "assets/photos/praise-express-worshipper",
    "sizes": [
-    640
+    640,
+    938
    ],
    "w": 938,
    "h": 1173,
@@ -1096,7 +1097,8 @@
    "slug": "worship-open-hands",
    "src": "assets/photos/worship-open-hands",
    "sizes": [
-    640
+    640,
+    938
    ],
    "w": 938,
    "h": 1173,
@@ -1113,7 +1115,8 @@
    "slug": "worship-gold",
    "src": "assets/photos/worship-gold",
    "sizes": [
-    640
+    640,
+    938
    ],
    "w": 938,
    "h": 1173,
@@ -1226,7 +1229,8 @@
    "src": "assets/photos/baptism",
    "sizes": [
     640,
-    1280
+    1280,
+    1600
    ],
    "w": 1600,
    "h": 1066,
@@ -1244,7 +1248,8 @@
    "src": "assets/photos/outreach-stage",
    "sizes": [
     640,
-    1280
+    1280,
+    1600
    ],
    "w": 1600,
    "h": 1066,
@@ -1262,7 +1267,8 @@
    "src": "assets/photos/youth-group",
    "sizes": [
     640,
-    1280
+    1280,
+    1833
    ],
    "w": 1833,
    "h": 1146,
