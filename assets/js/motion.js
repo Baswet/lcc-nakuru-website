@@ -10,19 +10,36 @@
   var $$ = function (s, c) { return [].slice.call((c || d).querySelectorAll(s)); };
 
 
-  /* ---------- Image fallbacks: maxres -> hq still -> brand background (never a broken icon) ---------- */
+  /* ---------- Image fallbacks: maxres -> hq still -> brand background (never a broken icon).
+     Self-healing: a load aborted in a hidden/background tab is retried when the tab becomes visible. ---------- */
+  var failed = [];
   var toFallback = function (im) {
-    if (im.dataset.fallback && im.getAttribute('src') !== im.dataset.fallback) { im.removeAttribute('srcset'); im.src = im.dataset.fallback; return true; }
+    if (!im.dataset.orig) im.dataset.orig = im.getAttribute('src') || '';
+    if (im.dataset.fallback && !im.dataset.tried) { im.dataset.tried = '1'; im.removeAttribute('srcset'); im.src = im.dataset.fallback; return true; }
     return false;
   };
+  var fail = function (im) { im.classList.add('img-failed'); if (failed.indexOf(im) < 0) failed.push(im); };
+  var retry = function () {
+    if (d.visibilityState !== 'visible' || !failed.length) return;
+    failed.splice(0).forEach(function (im) {
+      delete im.dataset.tried; im.classList.remove('img-failed');
+      im.addEventListener('load', function ok() { im.classList.remove('img-failed'); im.removeEventListener('load', ok); });
+      im.src = (im.dataset.orig || im.src) + ((im.dataset.orig || im.src).indexOf('?') < 0 ? '?r=' : '&r=') + Date.now();
+    });
+  };
+  d.addEventListener('visibilitychange', retry);
+  addEventListener('pageshow', retry);
+  addEventListener('online', retry);
   d.addEventListener('error', function (ev) {
     var t = ev.target; if (!t || t.tagName !== 'IMG') return;
-    if (!toFallback(t)) t.classList.add('img-failed');
+    if (!toFallback(t)) fail(t);
   }, true);
+  d.addEventListener('load', function (ev) { var t = ev.target; if (t && t.tagName === 'IMG') t.classList.remove('img-failed'); }, true);
   $$('img[data-fallback]').forEach(function (im) {
-    var chk = function () { if (im.complete && im.naturalWidth === 0) { if (!toFallback(im)) im.classList.add('img-failed'); } else if (im.naturalWidth && im.naturalWidth <= 120) toFallback(im); };
+    var chk = function () { if (im.complete && im.naturalWidth === 0 && im.getAttribute('src')) { if (!toFallback(im)) fail(im); } else if (im.naturalWidth && im.naturalWidth <= 120) toFallback(im); };
     chk(); im.addEventListener('load', chk);
   });
+  setTimeout(retry, 1500);
 
   /* ---------- Split text: words / chars / lines ---------- */
   function splitText(el) {
