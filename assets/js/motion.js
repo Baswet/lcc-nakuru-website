@@ -35,7 +35,7 @@
     if (!toFallback(t)) fail(t);
   }, true);
   d.addEventListener('load', function (ev) { var t = ev.target; if (t && t.tagName === 'IMG') t.classList.remove('img-failed'); }, true);
-  $$('img[data-fallback]').forEach(function (im) {
+  $$('img').forEach(function (im) {
     var chk = function () { if (im.complete && im.naturalWidth === 0 && im.getAttribute('src')) { if (!toFallback(im)) fail(im); } else if (im.naturalWidth && im.naturalWidth <= 120) toFallback(im); };
     chk(); im.addEventListener('load', chk);
   });

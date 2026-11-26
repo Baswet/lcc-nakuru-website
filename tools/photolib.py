@@ -15,8 +15,8 @@ BY = {p["slug"]: p for p in LIB}
 CAT = {}
 for _p in LIB:
     CAT.setdefault(_p["cat"], []).append(_p["slug"])
-CATNAME = {"worship": "Worship", "team": "Worship team", "conference": "Cutting Edge 2026", "teaching": "The Word",
-           "events": "Gatherings", "youth": "Students", "fellowship": "Fellowship", "congregation": "Congregation"}
+CATNAME = {"church": "Church life", "baptism": "Baptism", "outreach": "Outreach", "leadership": "Leadership", "worship": "Worship", "team": "Worship team", "conference": "Cutting Edge 2026", "teaching": "The Word",
+           "events": "Gatherings", "youth": "Youth", "fellowship": "Fellowship", "congregation": "Congregation"}
 e = lambda s: html.escape(str(s or ""), quote=True)
 
 
@@ -38,7 +38,8 @@ class Photos:
         p = BY[slug]
         if p.get("yt"):
             return f'https://i.ytimg.com/vi/{p["yt"]}/{"maxres" if w > 320 else "mq"}{p["frame"]}.jpg'
-        return self.base + p["src"]
+        sz = p.get("sizes", [1280])
+        return f'{self.base}{p["src"]}-{max([x for x in sz if x <= w] or sz[:1])}.jpg'
 
     def img(self, slug, w=960, eager=False, sizes="(max-width:860px) 100vw, 50vw", alt=None):
         p = BY[slug]
@@ -49,8 +50,16 @@ class Photos:
             ss = f'https://i.ytimg.com/vi/{yt}/mq{f}.jpg 320w, https://i.ytimg.com/vi/{yt}/maxres{f}.jpg 1280w'
             return (f'<img src="https://i.ytimg.com/vi/{yt}/maxres{f}.jpg" srcset="{ss}" sizes="{sizes}" data-fallback="https://i.ytimg.com/vi/{yt}/hq{f}.jpg" '
                     f'alt="{a}" width="1280" height="720" loading="{"eager" if eager else "lazy"}"{" fetchpriority=high" if eager else ""} decoding="async" style="object-position:{pos}">')
-        return (f'<img src="{self.base}{e(p["src"])}" alt="{a}" width="{p.get("w", 1600)}" height="{p.get("h", 1067)}" '
-                f'loading="{"eager" if eager else "lazy"}" decoding="async" style="object-position:{pos}">')
+        # locally stored, approved church photograph: WebP srcset + JPEG fallback (picture element)
+        sz = p.get("sizes", [1280])
+        big = max([x for x in sz if x <= max(w, 640)] or sz[:1])
+        base = self.base + p["src"]
+        ss = ", ".join(f"{base}-{x}.webp {x}w" for x in sz)
+        sj = ", ".join(f"{base}-{x}.jpg {x}w" for x in sz)
+        h = round(big * p["h"] / p["w"])
+        return (f'<picture><source type="image/webp" srcset="{ss}" sizes="{sizes}"><source type="image/jpeg" srcset="{sj}" sizes="{sizes}">'
+                f'<img src="{base}-{big}.jpg" alt="{a}" width="{big}" height="{h}" loading="{"eager" if eager else "lazy"}"{" fetchpriority=high" if eager else ""} '
+                f'decoding="async" style="object-position:{pos}"></picture>')
 
     def pic(self, slug, cls="", reveal=None, d=0, w=960, extra="", tag=None, **k):
         if not slug:

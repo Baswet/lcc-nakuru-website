@@ -35,26 +35,26 @@
   "instagram": "https://www.instagram.com/lccnakuru/"
  },
  "services": {
-  "verified": false,
-  "times_note": "Exact start and end times are being confirmed with the church office — please call 0722 864 864 before your first visit.",
+  "verified": true,
+  "times_note": "Times as published on the church's official Sunday Services posters (November 2026). Special services may differ, so check the Facebook page or call 0722 864 864.",
   "items": [
    {
     "name": "First Service",
     "day": "Sunday",
-    "time": "Morning · time to be confirmed",
+    "time": "7:30 am – 9:00 am",
     "status": "confirmed",
     "detail": "The first of two Sunday services, streamed live on YouTube every week.",
     "watch": "https://www.youtube.com/watch?v=co-4DGlDzXQ",
-    "source": "https://www.youtube.com/@DeliveranceChurchLCC/streams"
+    "source": "Official LCC Sunday Services posters for 8 Nov 2026 and 15 Nov 2026 (facebook.com/LifeCelebrationCentre)"
    },
    {
     "name": "Second Service",
     "day": "Sunday",
-    "time": "Late morning · time to be confirmed",
+    "time": "10:00 am – 12:00 noon",
     "status": "confirmed",
     "detail": "The second Sunday service, also streamed live every week.",
     "watch": "https://www.youtube.com/watch?v=iHh3K3p36Y8",
-    "source": "https://www.youtube.com/@DeliveranceChurchLCC/streams"
+    "source": "Official LCC Sunday Services posters for 8 Nov 2026 and 15 Nov 2026 (facebook.com/LifeCelebrationCentre)"
    },
    {
     "name": "Connection Time",
@@ -105,7 +105,8 @@
    "bio": "Rev. Elijah Mwangi is the Lead Pastor at Life Celebration Centre of Deliverance Church International, Nakuru. With a deep passion for planting and strengthening churches, he has raised and equipped leaders locally and internationally through preaching, teaching and intentional discipleship.",
    "verified": true,
    "bio_more": "He holds a Master’s Degree in Theology from Beacon University College of Ministry (USA), a Master’s Degree in Urban and Regional Planning from the University of Nairobi, and a Bachelor’s Degree in Engineering from Egerton University. He is also an author whose writings focus on biblical truth, leadership development and the Great Commission. He is married to Mary Wambui Maina.",
-   "source": "https://cuttingedgeconference.co.ke/about/"
+   "source": "https://cuttingedgeconference.co.ke/about/",
+   "portrait": "rev-elijah-mwangi"
   }
  ],
  "ministries": [
@@ -198,6 +199,19 @@
    "featured": true,
    "category": "Conference",
    "anchor": "John 4:35"
+  },
+  {
+   "slug": "thanksgiving-sunday-2026",
+   "title": "Thanksgiving Sunday",
+   "start": "2026-12-06",
+   "end": "2026-12-06",
+   "time": "9:00 am – 12:30 pm",
+   "place": "Deliverance Church Nakuru – LCC, Kariba Road, Freehold",
+   "summary": "Thanksgiving Sunday with Rev. Elijah & Mary Maina (as named on the church's poster). “The LORD hath done great things for us; whereof we are glad.” — Psalms 126:3",
+   "url": "events.html",
+   "featured": false,
+   "category": "Special service",
+   "source": "Official LCC Thanksgiving Sunday poster (facebook.com/LifeCelebrationCentre)"
   }
  ],
  "conference": {
@@ -971,70 +985,314 @@
  "photos": [
   {
    "slot": "about-hero-1",
-   "fb": "1188255743457773",
-   "desc": "Praise Express Service: the congregation in worship",
-   "approved": false,
-   "src": "",
+   "fb": "1430313902585288",
+   "desc": "Praise Express Service: joyful worship",
+   "approved": true,
+   "src": "assets/photos/praise-express-worshipper-640.jpg",
    "fallback_video": "I-Zw0aavDF4",
-   "frame": 1
+   "frame": 1,
+   "slug": "praise-express-worshipper"
   },
   {
    "slot": "about-hero-2",
-   "fb": "1444386234511388",
-   "desc": "Cutting Edge Conference 2026: hands raised in worship",
-   "approved": false,
-   "src": "",
+   "fb": "1430314335918578",
+   "desc": "The worship team beneath the cross",
+   "approved": true,
+   "src": "assets/photos/worship-team-cross-1280.jpg",
    "fallback_video": "GOjZxrPfljE",
-   "frame": 2
+   "frame": 2,
+   "slug": "worship-team-cross"
   },
   {
    "slot": "about-hero-3",
-   "fb": "1458372976446047",
-   "desc": "Sunday Second Service: the worship team",
-   "approved": false,
-   "src": "",
+   "fb": "1436970718586273",
+   "desc": "The LCC courtyard after service",
+   "approved": true,
+   "src": "assets/photos/conquerors-entrance-1280.jpg",
    "fallback_video": "iHh3K3p36Y8",
-   "frame": 2
+   "frame": 2,
+   "slug": "conquerors-entrance"
   },
   {
    "slot": "about-hero-4",
-   "fb": "1451367783813233",
-   "desc": "Crossover Kesha: worship into the new year",
-   "approved": false,
-   "src": "",
+   "fb": "1377404094542936",
+   "desc": "A fellowship day on the field",
+   "approved": true,
+   "src": "assets/photos/fellowship-circle-1280.jpg",
    "fallback_video": "dSnGjBfdnkI",
-   "frame": 2
+   "frame": 2,
+   "slug": "fellowship-circle"
   },
   {
    "slot": "about-hero-5",
-   "fb": "1444385771178101",
-   "desc": "Sunday First Service: leading worship",
-   "approved": false,
-   "src": "",
+   "fb": "1376606151289397",
+   "desc": "Baptism at LCC",
+   "approved": true,
+   "src": "assets/photos/baptism-1280.jpg",
    "fallback_video": "co-4DGlDzXQ",
-   "frame": 2
+   "frame": 2,
+   "slug": "baptism"
   },
   {
    "slot": "story-a",
-   "fb": "",
-   "desc": "Worship at the Cutting Edge Conference 2026",
-   "approved": false,
-   "src": "",
+   "fb": "1430140825935929",
+   "desc": "Members leaving the sanctuary after a Sunday service",
+   "approved": true,
+   "src": "assets/photos/courtyard-after-service-1280.jpg",
    "fallback_video": "GOjZxrPfljE",
-   "frame": 2
+   "frame": 2,
+   "slug": "courtyard-after-service"
   },
   {
    "slot": "story-b",
-   "fb": "",
-   "desc": "Praise Express Service",
-   "approved": false,
-   "src": "",
+   "fb": "1458372736446071",
+   "desc": "Two members greet each other in the courtyard",
+   "approved": true,
+   "src": "assets/photos/courtyard-greeting-1280.jpg",
    "fallback_video": "I-Zw0aavDF4",
-   "frame": 2
+   "frame": 2,
+   "slug": "courtyard-greeting"
   }
  ],
  "photos_note": "Photo slots show frames from LCC's own YouTube streams (each linked to its video) until the church office approves its photographs. Set approved:true and src to switch.",
  "library": [
+  {
+   "slug": "praise-express-worshipper",
+   "src": "assets/photos/praise-express-worshipper",
+   "sizes": [
+    640
+   ],
+   "w": 938,
+   "h": 1173,
+   "approved": true,
+   "cat": "worship",
+   "alt": "A young man lifts his arms in joyful worship during a Praise Express Service at LCC",
+   "short": "Praise Express Service",
+   "fbid": "1430313902585288",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1430313902585288",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "worship-team-cross",
+   "src": "assets/photos/worship-team-cross",
+   "sizes": [
+    640,
+    1280,
+    1920
+   ],
+   "w": 1921,
+   "h": 1201,
+   "approved": true,
+   "cat": "team",
+   "alt": "The worship team sings and dances on the LCC stage beneath the cross",
+   "short": "Worship team · Praise Express",
+   "fbid": "1430314335918578",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1430314335918578",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "worship-open-hands",
+   "src": "assets/photos/worship-open-hands",
+   "sizes": [
+    640
+   ],
+   "w": 938,
+   "h": 1173,
+   "approved": true,
+   "cat": "worship",
+   "alt": "A woman worships with eyes closed and hands open during Praise Express",
+   "short": "Praise Express Service",
+   "fbid": "1430314235918588",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1430314235918588",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "worship-gold",
+   "src": "assets/photos/worship-gold",
+   "sizes": [
+    640
+   ],
+   "w": 938,
+   "h": 1173,
+   "approved": true,
+   "cat": "worship",
+   "alt": "A woman in gold sings in worship during Praise Express",
+   "short": "Praise Express Service",
+   "fbid": "1430314389251906",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1430314389251906",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "conquerors-entrance",
+   "src": "assets/photos/conquerors-entrance",
+   "sizes": [
+    640,
+    1280,
+    1920
+   ],
+   "w": 2048,
+   "h": 1365,
+   "approved": true,
+   "cat": "church",
+   "alt": "The LCC courtyard fills after service beside the sanctuary's Conquerors Entrance",
+   "short": "After the service · LCC courtyard",
+   "fbid": "1436970718586273",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1436970718586273",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "courtyard-after-service",
+   "src": "assets/photos/courtyard-after-service",
+   "sizes": [
+    640,
+    1280,
+    1920
+   ],
+   "w": 2048,
+   "h": 1365,
+   "approved": true,
+   "cat": "church",
+   "alt": "Members stream out of the sanctuary into the courtyard after a Sunday service",
+   "short": "Sunday at LCC",
+   "fbid": "1430140825935929",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1430140825935929",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "fellowship-circle",
+   "src": "assets/photos/fellowship-circle",
+   "sizes": [
+    640,
+    1280,
+    1920
+   ],
+   "w": 2048,
+   "h": 1365,
+   "approved": true,
+   "cat": "fellowship",
+   "alt": "Members join hands in a large circle on the grass during a fellowship day",
+   "short": "Fellowship day",
+   "fbid": "1377404094542936",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1377404094542936",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "courtyard-greeting",
+   "src": "assets/photos/courtyard-greeting",
+   "sizes": [
+    640,
+    1280,
+    1920
+   ],
+   "w": 2048,
+   "h": 1365,
+   "approved": true,
+   "cat": "fellowship",
+   "alt": "Two women greet each other warmly in the LCC courtyard",
+   "short": "Life together",
+   "fbid": "1458372736446071",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1458372736446071",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "handshake-welcome",
+   "src": "assets/photos/handshake-welcome",
+   "sizes": [
+    640,
+    1280,
+    1920
+   ],
+   "w": 2048,
+   "h": 1365,
+   "approved": true,
+   "cat": "fellowship",
+   "alt": "A church member is welcomed with a handshake outside the sanctuary",
+   "short": "Welcome",
+   "fbid": "1458372976446047",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1458372976446047",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "baptism",
+   "src": "assets/photos/baptism",
+   "sizes": [
+    640,
+    1280
+   ],
+   "w": 1600,
+   "h": 1066,
+   "approved": true,
+   "cat": "baptism",
+   "alt": "Two ministers baptise a believer in the baptism pool at LCC",
+   "short": "Baptism",
+   "fbid": "1376606151289397",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1376606151289397",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "outreach-stage",
+   "src": "assets/photos/outreach-stage",
+   "sizes": [
+    640,
+    1280
+   ],
+   "w": 1600,
+   "h": 1066,
+   "approved": true,
+   "cat": "outreach",
+   "alt": "Ministers and singers lead worship from the Life Celebration Centre mobile stage",
+   "short": "Outreach · LCC mobile stage",
+   "fbid": "1375730991376913",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1375730991376913",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "youth-group",
+   "src": "assets/photos/youth-group",
+   "sizes": [
+    640,
+    1280
+   ],
+   "w": 1833,
+   "h": 1146,
+   "approved": true,
+   "cat": "youth",
+   "alt": "A group of LCC young adults stand together outside the church",
+   "short": "LCC youth",
+   "fbid": "1430318442584834",
+   "source": "LCC official Facebook page",
+   "source_url": "https://www.facebook.com/photo/?fbid=1430318442584834",
+   "status": "Approved for the website by the church (26 Nov 2026)"
+  },
+  {
+   "slug": "rev-elijah-mwangi",
+   "src": "assets/photos/rev-elijah-mwangi",
+   "sizes": [
+    480,
+    600
+   ],
+   "w": 690,
+   "h": 690,
+   "approved": true,
+   "cat": "leadership",
+   "alt": "Rev. Elijah Mwangi, Lead Pastor of LCC",
+   "short": "Rev. Elijah Mwangi",
+   "fbid": "1443574871259191",
+   "source": "Official LCC poster captioned “Rev. Elijah Mwangi” (Youth Ablaze, 8 Nov 2026); same portrait on the Sunday Services poster tagged to his profile",
+   "source_url": "https://www.facebook.com/photo/?fbid=1443574871259191",
+   "status": "Identity verified by official captioned posters"
+  },
   {
    "slug": "praise-oct-clapping",
    "yt": "I-Zw0aavDF4",

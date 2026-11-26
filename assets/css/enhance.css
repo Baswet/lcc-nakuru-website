@@ -436,3 +436,15 @@ img.img-failed{opacity:0}
 @media(max-width:600px){.medal{width:72%;margin:14% auto}.ringed::after{inset:-13%}}
 .portrait{overflow-x:clip}
 .invite{background:linear-gradient(rgba(21,17,14,.66),rgba(21,17,14,.66)),var(--fb,none) center/cover no-repeat,var(--night)}
+
+/* v2.2: up-next (typographic dates), lead portrait */
+.upnexts{display:grid;gap:0;margin:0 0 clamp(28px,4vw,44px);border-top:1.5px solid var(--ink)}
+.upnext{display:grid;grid-template-columns:120px 1fr;gap:clamp(16px,3vw,36px);padding:22px 0;border-bottom:1px solid var(--line);align-items:start}
+.un-date b{display:block;font:300 clamp(56px,6vw,84px)/.9 var(--serif);color:var(--clay);letter-spacing:-.04em}
+.un-date small{font:600 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.upnext .cat{font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.upnext h3{font-size:clamp(26px,2.6vw,36px);margin:6px 0 6px}
+.upnext p{margin:0;color:var(--muted);max-width:62ch}
+@media(max-width:600px){.upnext{grid-template-columns:72px 1fr}}
+.lead-portrait{max-width:380px;width:100%;margin:12% auto}
+@media(max-width:600px){.lead-portrait{width:72%;margin:14% auto}}
