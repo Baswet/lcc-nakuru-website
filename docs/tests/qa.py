@@ -4,7 +4,7 @@ from playwright.async_api import async_playwright
 ROOT = pathlib.Path(__file__).resolve().parent.parent / 'website'
 OUT = pathlib.Path(__file__).resolve().parent
 PAGES = sorted(p.name for p in ROOT.glob('*.html'))
-WIDTHS = [320, 360, 375, 390, 430, 768, 1024, 1440]
+WIDTHS = [320, 360, 375, 390, 430, 768, 1024, 1440, 1920]
 AXE = open('/tmp/fonts/node_modules/axe-core/axe.min.js').read()
 async def main():
     res = {'overflow': [], 'jserrors': [], 'axe': {}, 'links': [], 'small_targets': []}

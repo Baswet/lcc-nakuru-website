@@ -20,6 +20,7 @@
 <link rel="preload" href="assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/enhance.css">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": ["Church", "PlaceOfWorship"], "@id": "https://baswet.github.io/lcc-nakuru-website/#church", "name": "Deliverance Church International – Life Celebration Centre (LCC), Nakuru", "alternateName": ["Life Celebration Centre", "LCC Nakuru"], "url": "https://baswet.github.io/lcc-nakuru-website/", "telephone": "+254722864864", "email": "lccnakuru@yahoo.com", "slogan": "Transforming Nations for Christ", "description": "Life Celebration Centre exists to reconcile people to God, equip them for Ministry to God and the people with a transformative agenda.", "address": {"@type": "PostalAddress", "streetAddress": "General Kariba Street, Freehold", "addressLocality": "Nakuru", "addressCountry": "KE", "postOfficeBoxNumber": "2758-20100"}, "sameAs": ["https://www.youtube.com/@DeliveranceChurchLCC", "https://www.facebook.com/LifeCelebrationCentre", "https://www.instagram.com/lccnakuru/"], "employee": [{"@type": "Person", "name": "Rev. Elijah Mwangi", "jobTitle": "Lead Pastor"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Cutting Edge Conference 2027", "startDate": "2027-03-30", "endDate": "2027-04-04", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Deliverance Church LCC", "address": {"@type": "PostalAddress", "streetAddress": "Kariba Road, Freehold", "addressLocality": "Nakuru", "addressCountry": "KE"}}, "organizer": {"@type": "Organization", "name": "Deliverance Church International – Life Celebration Centre (LCC), Nakuru", "url": "https://baswet.github.io/lcc-nakuru-website/"}, "description": "Theme: Commissioning for the Global Mission. With Rev. Elijah Mwangi (convener), Bishop Steve Kamau (USA), Bishop Darnell Williams (USA) and Rev. George Macharia (Kenya).", "url": "https://cuttingedgeconference.co.ke/form/conference-delegates-registration-2027/"}</script>
@@ -33,19 +34,19 @@
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
   <nav class="nav" id="site-nav" aria-label="Main">
    <a class="watch" href="watch.html">Watch online</a>
-   <a href="about.html">About</a><a href="services.html">Services</a><a href="ministries.html">Ministries</a><a href="sermons.html">Sermons</a><a href="events.html">Events</a><a href="give.html">Give</a><a href="contact.html">Contact</a>
+   <a href="about.html">About</a><a href="services.html">Services</a><a href="ministries.html">Ministries</a><a href="sermons.html">Sermons</a><a href="events.html">Events</a><a href="gallery.html">Gallery</a><a href="give.html">Give</a><a href="contact.html">Contact</a>
    <a class="btn btn-solid" href="visit.html">Plan your visit</a>
   </nav>
  </div>
 </header>
 <main id="main" tabindex="-1">
 
-<div class="wrap"><header class="page-hero"><span class="eyebrow">Events</span><h1>What's <em>coming up.</em></h1><p class="lead">Major events are listed here; weekly announcements are on our <a href="https://www.facebook.com/LifeCelebrationCentre" rel="noopener" target="_blank">Facebook page</a>.</p></header></div>
+<div class="wrap"><header class="page-hero"><span class="eyebrow">Events</span><h1 data-split="words">What's <em>coming up.</em></h1><p class="lead">Major events are listed here; weekly announcements are on our <a href="https://www.facebook.com/LifeCelebrationCentre" rel="noopener" target="_blank">Facebook page</a>.</p></header></div>
 <section class="sec"><div class="wrap">
  <span class="eyebrow">Featured · upcoming</span>
  <article class="feature-event"><div class="fe-media"><div class="bignum">30–4<small>March – April 2027</small></div></div><div class="fe-body"><span class="eyebrow">Next major event · Conference</span><h2>Cutting Edge Conference 2027</h2><p class="lead" style="color:#C9BDAF">Commissioning for the Global Mission · Anchor scripture John 4:35</p><div class="countdown" data-countdown="2027-03-30T09:00:00+03:00" aria-label="Time until the conference starts"></div><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-sun" href="https://cuttingedgeconference.co.ke/form/conference-delegates-registration-2027/" rel="noopener" target="_blank">Register on the official site</a><a class="btn btn-ghost-light" href="conference.html">Explore the conference</a></p></div></article>
  <div class="sec-head mt4"><div><span class="eyebrow">Recurring</span><h2>Throughout the year</h2></div></div>
- <div class="cards">
+ <div class="cards" data-stagger>
   <div class="card"><span class="kind">Every Sunday</span><h3>First &amp; Second Service</h3><p class="muted">Streamed live on YouTube. <a href="services.html">Times &amp; details</a></p></div>
   <div class="card"><span class="kind">Every few months</span><h3>Praise Express Service</h3><p class="muted">Next date to be announced on Facebook.</p></div>
   <div class="card"><span class="kind">Special nights</span><h3>Kesha</h3><p class="muted">Including the annual Crossover Kesha on 31 December — date to be announced.</p></div>
@@ -71,5 +72,6 @@
 </footer>
 <dialog class="lightbox" id="lightbox" aria-label="Media viewer"><div class="lb-frame" id="lb-frame"></div><div class="lb-bar"><span id="lb-title"></span><span><button type="button" data-lb="prev" aria-label="Previous">←</button> <button type="button" data-lb="next" aria-label="Next">→</button> <button type="button" data-lb="close">Close</button></span></div></dialog>
 <script src="assets/js/site.js" defer></script>
+<script src="assets/js/motion.js" defer></script>
 </body>
 </html>

@@ -18,3 +18,11 @@ PASS  gallery: category filter
 PASS  mobile: menu opens
 PASS  mobile: Esc closes menu
 PASS  reduced motion: slideshow starts paused
+PASS  hero: photo present and loaded
+PASS  hero: fallback background defined
+PASS  hero: failed photo is hidden, never a broken icon
+PASS  film strip: arrow scrolls
+PASS  photo viewer: opens full screen
+PASS  photo viewer: arrow key advances
+PASS  photo viewer: Esc closes and returns focus
+PASS  nav: Gallery link present on every page

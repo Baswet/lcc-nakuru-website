@@ -15,10 +15,14 @@ BASE = S["url"].rstrip("/") + "/"
 TODAY = datetime.date.today()
 e = lambda s: html.escape(str(s or ""), quote=True)
 VID = {v["id"]: v for v in C["videos"]}
+import sys  # noqa: E402
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from photolib import Photos, pick, picks, stamp, BY, CATNAME, LIB  # noqa: E402  (v2.1 photography layer)
+PH = Photos("")
 
 NAV = [("about.html", "About"), ("services.html", "Services"), ("ministries.html", "Ministries"),
-       ("sermons.html", "Sermons"), ("events.html", "Events"), ("give.html", "Give"), ("contact.html", "Contact")]
-SECTION_OF = {"leadership.html": "about.html", "gallery.html": "about.html", "visit.html": "visit.html",
+       ("sermons.html", "Sermons"), ("events.html", "Events"), ("gallery.html", "Gallery"), ("give.html", "Give"), ("contact.html", "Contact")]
+SECTION_OF = {"leadership.html": "about.html", "visit.html": "visit.html",
               "conference.html": "events.html", "watch.html": "sermons.html", "news.html": "about.html"}
 
 MARK = ('<svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#1E1A16"/>'
@@ -153,6 +157,7 @@ def page(slug, title, desc, body, current=None, extra_ld=None):
 <link rel="preload" href="assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/enhance.css">
 <script>document.documentElement.classList.add('js')</script>
 {ld}
 </head>
@@ -186,6 +191,7 @@ def page(slug, title, desc, body, current=None, extra_ld=None):
 </footer>
 <dialog class="lightbox" id="lightbox" aria-label="Media viewer"><div class="lb-frame" id="lb-frame"></div><div class="lb-bar"><span id="lb-title"></span><span><button type="button" data-lb="prev" aria-label="Previous">←</button> <button type="button" data-lb="next" aria-label="Next">→</button> <button type="button" data-lb="close">Close</button></span></div></dialog>
 <script src="assets/js/site.js" defer></script>
+<script src="assets/js/motion.js" defer></script>
 </body>
 </html>
 """
@@ -243,14 +249,14 @@ def feature_conf(compact=False):
 
 def mission_band():
     return (f'<section class="sec band-night" id="mission" aria-labelledby="mv-h"><div class="wrap">'
-            f'<span class="eyebrow">Our vision</span><h2 id="mv-h" class="statement">Transforming <em>Nations</em> for Christ.</h2>'
-            f'<div class="split mt4"><div><span class="eyebrow">Our mission</span><p style="font:350 clamp(24px,2.8vw,36px)/1.3 var(--serif);color:var(--bone);margin:0">“{e(S["mission"])}”</p></div>'
-            f'<div class="speakers" style="align-self:end"><div class="speaker"><b>Reconcile</b><small>people to God</small></div><div class="speaker"><b>Equip</b><small>for ministry to God and people</small></div><div class="speaker"><b>Transform</b><small>with a transformative agenda</small></div><div class="speaker"><b>Nations</b><small>Nakuru and the world</small></div></div></div>'
+            f'<span class="eyebrow">Our vision</span><h2 id="mv-h" class="statement" data-split="lines" data-lines="Transforming|<em>Nations</em> for Christ.">Transforming <em>Nations</em> for Christ.</h2>'
+            f'<div class="split mt4"><div><span class="eyebrow">Our mission</span><p class="ink" style="font:350 clamp(24px,2.8vw,36px)/1.3 var(--serif);color:var(--bone);margin:0">“{e(S["mission"])}”</p></div>'
+            f'<div class="speakers" style="align-self:end" data-stagger><div class="speaker"><b>Reconcile</b><small>people to God</small></div><div class="speaker"><b>Equip</b><small>for ministry to God and people</small></div><div class="speaker"><b>Transform</b><small>with a transformative agenda</small></div><div class="speaker"><b>Nations</b><small>Nakuru and the world</small></div></div></div>'
             f'<p class="credit mt2">Source: LCC YouTube channel and cuttingedgeconference.co.ke/about</p></div></section>')
 
 
 def values_block():
-    return ('<div class="values">' + "".join(f'<div class="value"><span class="n">0{i+1}</span><b>{e(v)}</b></div>' for i, v in enumerate(S["values"])) + '</div>'
+    return ('<div class="values" data-stagger>' + "".join(f'<div class="value"><span class="n">0{i+1}</span><b>{e(v)}</b></div>' for i, v in enumerate(S["values"])) + '</div>'
             f'<p class="credit">Core values as published at cuttingedgeconference.co.ke/about</p>')
 
 
@@ -260,7 +266,7 @@ def discover_grid():
         href = m.get("link") or f'ministries.html#{m["slug"]}'
         img = yt_img(m["video"], "", frame=2) if m.get("video") else ""
         out.append(f'<a href="{e(href)}">{img}<small>{e(m["kind"])}</small><b>{e(m["name"])}</b><span>Discover →</span></a>')
-    return '<div class="discover">' + "".join(out) + '</div>'
+    return '<div class="discover" data-stagger>' + "".join(out) + '</div>'
 
 
 def collage(items, group=None):
@@ -280,77 +286,68 @@ P = {}
 
 # ---------------- HOME
 hero_v = latest_services[1] if len(latest_services) > 1 else latest_services[0]
+HERO = "cec26-final-day" if "cec26-final-day" in BY else (LIB[0]["slug"] if LIB else None)
+_h = BY.get(HERO, {})
+_mv = latest_services[2]
 P["index.html"] = page("index.html", f"{S['name']} (LCC) Nakuru — Deliverance Church International",
     "Deliverance Church International – Life Celebration Centre (LCC), General Kariba Street, Freehold, Nakuru. Transforming Nations for Christ. Sunday services, sermons, ministries and the Cutting Edge Conference.",
 f"""
-<div class="wrap">
- <section class="hero">
-  <div>
-   <span class="eyebrow">Deliverance Church International · Nakuru</span>
-   <h1>A place to <em>celebrate</em> life in Christ.</h1>
-   <p class="lead">Life Celebration Centre exists to reconcile people to God and equip them for ministry — every Sunday on General Kariba Street, Freehold.</p>
-   <div class="actions"><a class="btn btn-solid" href="visit.html">Plan your visit</a><a class="btn" href="watch.html">Watch latest service</a><a class="btn" href="about.html">Discover LCC</a></div>
-  </div>
-  <figure class="video" style="margin:0">
-   <div class="frame" style="aspect-ratio:4/5;border-radius:var(--r)">{yt_img(hero_v["id"], "Worship team leading the Sunday service at LCC (frame from the stream)", lazy=False, frame=2)}<button class="play" type="button" data-yt="{e(hero_v['id'])}" aria-label="Play video: {e(hero_v['title'])}"></button></div>
-   <figcaption><small>Latest from LCC · {e(hero_v["title"])} · {e(hero_v["published"])}</small></figcaption>
-  </figure>
- </section>
- <div class="facts">
-  <div><small>Sundays</small><b>First &amp; Second Service</b><a href="services.html">Service times →</a></div>
-  <div><small>Where</small><b>Kariba Street, Freehold</b><a href="visit.html#find-us">Directions →</a></div>
-  <div><small>Online</small><b>Streamed every Sunday</b><a href="watch.html">Watch online →</a></div>
-  <div><small>30 Mar – 4 Apr 2027</small><b>Cutting Edge</b><a href="conference.html">Conference →</a></div>
+<section class="hx" aria-labelledby="hx-h"><div class="wrap hx-grid">
+ <div class="hx-text">
+  <span class="eyebrow" data-reveal="fade">Deliverance Church International · Nakuru</span>
+  <h1 id="hx-h" data-split="words">A place to <em>celebrate</em> life in Christ.</h1>
+  <p class="lead" data-reveal="rise" style="--d:.45s">Every Sunday on General Kariba Street, Freehold — a church family reconciling people to God and equipping them for ministry.</p>
+  <div class="actions" data-reveal="rise" style="--d:.6s"><a class="btn btn-solid" href="visit.html">Plan your visit <span class="arrow" aria-hidden="true">→</span></a><a class="btn" href="watch.html">Watch online</a></div>
+  <p class="hx-links" data-reveal="fade" style="--d:.8s"><a href="contact.html#prayer">Ask for prayer</a><a href="ministries.html">Find a ministry</a><a href="sermons.html">Latest messages</a></p>
  </div>
-</div>
+ <figure class="hx-photo" data-reveal="arch" style="--fb:url('https://i.ytimg.com/vi/{e(_h.get('yt',''))}/hq{_h.get('frame',2)}.jpg')">
+  {PH.img(HERO, 1280, eager=True, sizes="(max-width:860px) 100vw, 44vw") if HERO else ''}
+  <figcaption>{e(_h.get('short',''))}</figcaption>
+ </figure>
+</div></section>
 
-<section class="sec"><div class="wrap">
- <div class="sec-head"><div><span class="eyebrow">Next steps</span><h2>Where would you like to <em>begin?</em></h2></div></div>
- <div class="intents">
-  <a class="intent t-ochre" href="visit.html"><b>I'm new and want to visit</b><span>Plan your visit →</span></a>
-  <a class="intent t-flamingo" href="contact.html#prayer"><b>I'd like someone to pray with me</b><span>Send a private request →</span></a>
-  <a class="intent" href="ministries.html"><b>I want to serve and belong</b><span>Discover ministries →</span></a>
-  <a class="intent t-sand" href="watch.html"><b>I want to watch online</b><span>Latest services →</span></a>
+<div class="wrap"><div class="facts" data-stagger>
+ <div><small>Sundays</small><b>First &amp; Second Service</b><a href="services.html">Service times →</a></div>
+ <div><small>Where</small><b>Kariba Street, Freehold</b><a href="visit.html#find-us">Directions →</a></div>
+ <div><small>Online</small><b>Streamed every Sunday</b><a href="watch.html">Watch online →</a></div>
+ <div><small>30 Mar – 4 Apr 2027</small><b>Cutting Edge</b><a href="conference.html">Conference →</a></div>
+</div></div>
+
+<section class="sec who has-bigword" aria-labelledby="who-h"><span class="bigword" aria-hidden="true">LCC</span><div class="wrap who-grid">
+ <div>
+  <span class="eyebrow">Who we are</span>
+  <h2 id="who-h" class="statement" data-split="lines" data-lines="Transforming|<em>nations</em> for Christ.">Transforming <em>nations</em> for Christ.</h2>
+ </div>
+ <div>
+  <p class="ink who-mission">{e(S['mission'])}</p>
+  <p class="values-line">{' <span aria-hidden="true">·</span> '.join(e(v) for v in S['values'])}</p>
+  <p class="who-lead">Led by <a href="leadership.html">{e(C['leadership'][0]['name'])}</a>, Lead Pastor — <a href="about.html">read our story →</a></p>
  </div>
 </div></section>
 
 <section class="sec band-night" aria-labelledby="sun-h"><div class="wrap">
- <div class="sec-head"><div><span class="eyebrow">This Sunday at LCC</span><h2 id="sun-h">Join us in person or online</h2></div><a class="btn btn-ghost-light" href="services.html">All services &amp; programmes</a></div>
+ <div class="sec-head"><div><span class="eyebrow">This Sunday at LCC</span><h2 id="sun-h" data-split="words">Join us in person or <em style="color:var(--sun)">online</em></h2></div></div>
  {this_sunday()}
+ <div class="feature-video mt4"><div>{video_card(_mv)}</div><div><span class="eyebrow">Message of the week</span><h3 style="font-size:clamp(28px,3vw,40px);color:var(--bone)">{e(_mv["title"].split(" · ")[0])}</h3><p class="lead">Streamed on {e(_mv["published"])}. Catch up here or on YouTube.</p><p><a class="btn btn-ghost-light" href="sermons.html">Sermon library</a></p></div></div>
 </div></section>
 
-<section class="sec" aria-labelledby="mow-h"><div class="wrap">
- <div class="sec-head"><div><span class="eyebrow">Message of the week</span><h2 id="mow-h">{e(latest_services[2]["title"].split(" · ")[0])}</h2></div>{share_btn()}</div>
- <div class="feature-video"><div>{video_card(latest_services[2])}</div><div><p class="lead">The most recent Sunday message from LCC, streamed on {e(latest_services[2]["published"])}. Watch the full service here or on YouTube, and catch up on earlier messages in the sermon library.</p><p><a class="btn" href="sermons.html">Browse all sermons</a></p></div></div>
+<section class="sec" aria-labelledby="min-h"><div class="wrap duo">
+ <div style="max-width:460px;width:100%;margin:auto">{PH.pic(pick("team", 0), "f-arch", "arch")}</div>
+ <div>
+  <span class="eyebrow">Ministries &amp; community</span>
+  <h2 id="min-h" data-split="words">Find your place to <em>belong.</em></h2>
+  <ul class="mini-list" data-stagger>{''.join(f'<li><a href="{e(m.get("link") or "ministries.html#" + m["slug"])}"><b>{e(m["name"])}</b><span>{e(m["kind"])}</span></a></li>' for m in C["ministries"])}</ul>
+ </div>
 </div></section>
-{kente()}
-<section class="sec" aria-labelledby="ev-h"><div class="wrap">
- <div class="sec-head"><div><span class="eyebrow">Events</span><h2 id="ev-h">What's happening at LCC</h2></div><a class="btn" href="events.html">View all events</a></div>
+
+<section class="sec" aria-labelledby="ev-h" style="padding-top:0"><div class="wrap">
+ <h2 class="sr-only" id="ev-h">Next major event</h2>
  {feature_conf()}
- <h3 class="mt4">Recent highlights</h3>
- <div class="ecards mt2">{''.join(ecard(ev) for ev in PAST[:3])}</div>
+ <p class="mt2" style="text-align:right"><a href="events.html">All events &amp; past gatherings →</a></p>
 </div></section>
 
-<section class="sec bg-sand" aria-labelledby="min-h"><div class="wrap">
- <div class="sec-head"><div><span class="eyebrow">Ministries</span><h2 id="min-h">Find your place to <em>belong</em></h2></div><a class="btn" href="ministries.html">All ministries</a></div>
- {discover_grid()}
-</div></section>
-
-<section class="sec" aria-labelledby="mom-h"><div class="wrap">
- <div class="sec-head"><div><span class="eyebrow">LCC Moments</span><h2 id="mom-h">Church life, captured</h2></div><a class="btn" href="gallery.html">Open the gallery</a></div>
- <div class="moments">{''.join(f'<div class="m">{yt_img(v["id"], "", frame=2)}<a href="gallery.html">{e(v["title"])}</a></div>' for v,_ in [MOMENTS[1], MOMENTS[4], MOMENTS[7], MOMENTS[10], MOMENTS[11]])}</div>
- <p class="credit">Moments captured from LCC's own YouTube streams. Approved church photography will be added as it becomes available.</p>
-</div></section>
-
-{mission_band()}
-
-<section class="sec" aria-labelledby="news-h"><div class="wrap">
- <div class="sec-head"><div><span class="eyebrow">Announcements</span><h2 id="news-h">Latest from LCC</h2></div><a class="btn" href="news.html">All announcements</a></div>
- <div class="cards">{''.join(f'<article class="card"><span class="kind">{e(n["date"])}</span><h3>{e(n["title"])}</h3><p class="muted">{e(n["summary"])}</p></article>' for n in C['news'][:3])}</div>
-</div></section>
-
-<section class="sec"><div class="wrap">
- <div class="invite">{yt_img("I-Zw0aavDF4", "", frame=1)}
+<section class="sec" style="padding-top:0"><div class="wrap">
+ <div class="invite" style="--fb:url('https://i.ytimg.com/vi/I-Zw0aavDF4/hq1.jpg')">{PH.img("praise-oct-clapping", 1280, sizes="100vw", alt="") if "praise-oct-clapping" in BY else ""}
   <span class="eyebrow">Come and experience LCC</span><h2>There's a seat for you this Sunday.</h2>
   <p class="lead" style="color:#E6DCCF">General Kariba Street, Freehold, Nakuru · First &amp; Second Service · Times being confirmed — call {e(CT['phone'])}</p>
   <p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-sun" href="visit.html">Plan your visit</a><a class="btn btn-ghost-light" href="{maps_url()}" rel="noopener" target="_blank">Get directions</a></p>
@@ -375,18 +372,18 @@ f"""
  <p class="slide-cap" data-slide-cap>{html.unescape(caps0) if caps0 else ''}</p>
  <div class="wrap inner">
   <span class="eyebrow">Discover LCC</span>
-  <h1>More than a church. A place to <em style="color:var(--sun)">belong.</em></h1>
+  <h1 data-split="words">More than a church. A place to <em style="color:var(--sun)">belong.</em></h1>
   <p class="lead">A Deliverance Church International family in Freehold, Nakuru — celebrating life in Christ and transforming nations for Him.</p>
   <div class="actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px"><a class="btn btn-sun" href="#story">Explore our story</a><a class="btn btn-ghost-light" href="visit.html">Plan your visit</a></div>
   <div class="slide-ui"><button type="button" data-slide-prev aria-label="Previous slide">←</button><div class="dots" role="group" aria-label="Choose slide">{''.join(f'<button type="button" data-slide-to="{i}" aria-label="Slide {i+1}"{" aria-current=true" if i==0 else ""}></button>' for i in range(len(slides)))}</div><button type="button" data-slide-next aria-label="Next slide">→</button><button type="button" data-slide-pause aria-pressed="false">Pause</button></div>
  </div>
 </section>
 <nav class="subnav" aria-label="On this page"><div class="wrap">
- <a href="#story">Our story</a><a href="#journey">Journey</a><a href="#mission">Mission &amp; vision</a><a href="#values">Values</a><a href="#family">Church family</a><a href="#leadership">Leadership</a><a href="#ministries">Ministries</a><a href="#worship">Worship</a><a href="#events">Events</a><a href="#conference">Cutting Edge</a><a href="#stories">Stories</a><a href="#visit">Visit</a>
+ <a href="#story">Our story</a><a href="#journey">Journey</a><a href="#mission">Mission &amp; vision</a><a href="#values">Values</a><a href="#family">Church family</a><a href="#leadership">Leadership</a><a href="#worship">Worship</a><a href="#conference">Cutting Edge</a><a href="#visit">Visit</a>
 </div></nav>
 
 <section class="sec" id="story" aria-labelledby="story-h"><div class="wrap split">
- <div class="layered"><div class="a">{photo_slot("story-a")[0]}</div><div class="b">{photo_slot("story-b")[0]}</div></div>
+ <div class="layered"><div class="a" data-reveal="left">{photo_slot("story-a")[0]}</div><div class="b" data-reveal="up" style="--d:.35s">{photo_slot("story-b")[0]}</div></div>
  <div>
   <span class="num">01 — The story of LCC</span>
   <h2 id="story-h" class="mt2">A Nakuru church with a <em>global</em> heart.</h2>
@@ -419,12 +416,12 @@ f"""
 <section class="sec bg-sand" id="family" aria-labelledby="family-h"><div class="wrap">
  <div class="sec-head"><div><span class="num">05 — Our church family</span><h2 id="family-h" class="mt2">Worship, fellowship and <em>connection</em></h2></div><a class="btn" href="gallery.html">Explore LCC Moments</a></div>
  <p class="lead" style="max-width:60ch">{e(C['about']['family'])}</p>
- <div class="mt4">{collage(MOMENTS[:9], "family")}</div>
+ <div class="mt4">{collage([MOMENTS[i] for i in (0, 4, 7, 10, 12) if i < len(MOMENTS)], "family")}</div>
  <p class="credit">Moments captured from LCC's own YouTube streams — select any to watch. Church photography (Facebook albums) awaits the church office's approval.</p>
 </div></section>
 
 <section class="sec" id="leadership" aria-labelledby="lead-h"><div class="wrap portrait">
- {ph("Awaiting approved portrait of Rev. Elijah Mwangi")}
+ <div class="medal ringed" role="img" aria-label="Portrait of Rev. Elijah Mwangi to be supplied by the church office"><span aria-hidden="true">EM</span><small aria-hidden="true">Lead Pastor</small></div>
  <div>
   <span class="num">06 — Leadership</span>
   <h2 id="lead-h" class="mt2">{e(leader['name'])}</h2>
@@ -435,47 +432,23 @@ f"""
  </div>
 </div></section>
 
-<section class="sec bg-sand" id="ministries" aria-labelledby="min-h"><div class="wrap">
- <span class="num">07 — Our ministries</span>
- <h2 id="min-h" class="mt2">Discover where you fit</h2>
- <div class="mt4">{discover_grid()}</div>
- <p class="credit">{e(C['ministries_note'])}</p>
-</div></section>
-
 <section class="sec band-night" id="worship" aria-labelledby="w-h"><div class="wrap">
- <span class="eyebrow">08 — Our worship experience</span>
+ <span class="eyebrow">07 — Our worship experience</span>
  <h2 id="w-h">Worship at LCC</h2>
  <div class="feature-video mt2"><div>{video_card(praise[0], lazy=True)}</div><div><p class="lead">Praise Express services fill the sanctuary with a full service of praise and worship, alongside recordings by LCC's worship ministers, One Accord Ministers.</p><ul class="meta-list"><li><b>Praise Express</b> — held every few months</li><li><b>One Accord Ministers</b> — worship recordings</li><li><b>Live at LCC</b> — guest worship moments</li></ul></div></div>
- <div class="mt4">{rail("More worship from LCC", praise[1:] + worship, "rail-worship")}</div>
-</div></section>
-
-<section class="sec" id="events" aria-labelledby="e-h"><div class="wrap">
- <div class="sec-head"><div><span class="num">09 — Events</span><h2 id="e-h" class="mt2">Gatherings that mark our year</h2></div><a class="btn" href="events.html">All events</a></div>
- <h3>Upcoming</h3>
- <div class="ecards mt2">{''.join(f'<article class="ecard"><div class="frame">{yt_img("GOjZxrPfljE", "", frame=1)}<span class="vdate">{e(fmt_range(ev["start"], ev["end"]))}</span></div><div class="body"><span class="cat">{e(ev["category"])}</span><h3><a href="conference.html">{e(ev["title"])}</a></h3><p>{e(CF["theme"])}</p><a href="conference.html">View event →</a></div></article>' for ev in up_ev)}</div>
- <h3 class="mt4">Past events</h3>
- <div class="ecards mt2">{''.join(ecard(ev) for ev in PAST[:6])}</div>
 </div></section>
 
 <section class="cu" id="conference" aria-labelledby="c-h"><div class="wrap cu-hero">
- <span class="eyebrow">10 — Cutting Edge Conference</span>
+ <span class="eyebrow">08 — Cutting Edge Conference</span>
  <div class="yr" aria-hidden="true">2027</div>
  <h2 id="c-h" class="statement" style="color:var(--bone);font-size:clamp(36px,5vw,72px)">{e(CF['theme'])}</h2>
  <div class="cu-grid mt4"><div><small>Dates</small><b>{e(CF['dates'])}</b></div><div><small>Venue</small><b>LCC, Freehold, Nakuru</b></div><div><small>Anchor scripture</small><b>{e(CF['anchor'])}</b></div><div><small>Since</small><b>2018 · every April</b></div></div>
  <p class="mt2" style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-sun" href="conference.html">View the conference</a><a class="btn btn-ghost-light" href="{e(CF['register'])}" rel="noopener" target="_blank">Register (official site)</a></p>
- <div class="mt4">{rail("Previous editions", conf26[:6] + conf_old, "rail-cec")}</div>
-</div></section>
-
-<section class="sec" id="stories" aria-labelledby="s-h"><div class="wrap split">
- <div><span class="num">11 — Stories &amp; testimonies</span><h2 id="s-h" class="mt2">Your story belongs here</h2></div>
- <div><p class="lead" style="max-width:none">We only publish testimonies that members have shared with permission. If God has done something in your life through LCC, we would love to hear it.</p>
- <p><a class="btn btn-solid" href="contact.html#message">Share your story</a></p>
- <p class="credit">No testimonies are shown yet — none have been approved for publication.</p></div>
 </div></section>
 
 <section class="sec" id="visit"><div class="wrap">
  <div class="invite">{yt_img("GOjZxrPfljE", "", frame=2)}
-  <span class="eyebrow">12 — Come and experience LCC</span><h2>Celebrate life with us this Sunday.</h2>
+  <span class="eyebrow">09 — Come and experience LCC</span><h2>Celebrate life with us this Sunday.</h2>
   <p class="lead" style="color:#E6DCCF">First &amp; Second Service · General Kariba Street, Freehold, Nakuru · Times being confirmed — call {e(CT['phone'])}</p>
   <p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-sun" href="visit.html">Plan your visit</a><a class="btn btn-ghost-light" href="watch.html">Watch online</a><a class="btn btn-ghost-light" href="contact.html">Contact LCC</a><a class="btn btn-ghost-light" href="{maps_url()}" rel="noopener" target="_blank">Map</a></p>
  </div>
@@ -485,9 +458,9 @@ f"""
 # ---------------- LEADERSHIP
 P["leadership.html"] = page("leadership.html", "Leadership", "Leadership at Life Celebration Centre (LCC) Nakuru: Lead Pastor Rev. Elijah Mwangi — official biography.",
 f"""
-<div class="wrap"><header class="page-hero"><span class="eyebrow">Leadership</span><h1>Shepherds who <em>serve.</em></h1></header></div>
+<div class="wrap"><header class="page-hero"><span class="eyebrow">Leadership</span><h1 data-split="words">Shepherds who <em>serve.</em></h1></header></div>
 <section class="sec"><div class="wrap portrait">
- {ph("Awaiting approved portrait of Rev. Elijah Mwangi")}
+ <div class="medal ringed" role="img" aria-label="Portrait of Rev. Elijah Mwangi to be supplied by the church office"><span aria-hidden="true">EM</span><small aria-hidden="true">Lead Pastor</small></div>
  <div><span class="eyebrow">{e(leader['role'])}</span><h2>{e(leader['name'])}</h2>
  <p class="lead" style="max-width:none">{e(leader['bio'])}</p><p>{e(leader['bio_more'])}</p>
  <p class="credit">Source: official biography at cuttingedgeconference.co.ke/about</p>
@@ -495,14 +468,14 @@ f"""
 </div></section>
 <section class="sec bg-sand"><div class="wrap split">
  <div><span class="eyebrow">From our pulpit</span><h2>Voices you'll hear at LCC</h2><p class="muted">Names as they appear in LCC's own service and conference recordings. Formal pastoral-team roles will be added once confirmed by the church office.</p></div>
- <ul class="pulpit">{''.join(f'<li><b>{e(p["name"])}</b><span>{e(p["note"])}</span></li>' for p in C['pulpit'])}</ul>
+ <ul class="pulpit" data-stagger>{''.join(f'<li><b>{e(p["name"])}</b><span>{e(p["note"])}</span></li>' for p in C['pulpit'])}</ul>
 </div></section>
 """)
 
 # ---------------- SERVICES
 P["services.html"] = page("services.html", "Services & weekly programme", "Sunday First and Second Services, Praise Express, Kesha nights and connection time at LCC Nakuru — with times being confirmed and online streaming every Sunday.",
 f"""
-<div class="wrap"><header class="page-hero"><span class="eyebrow">Services</span><h1>When we <em>gather.</em></h1><p class="lead">LCC meets every Sunday for two services, streamed live on YouTube, plus special services and nights of prayer through the year.</p></header></div>
+<div class="wrap"><header class="page-hero"><span class="eyebrow">Services</span><h1 data-split="words">When we <em>gather.</em></h1><p class="lead">LCC meets every Sunday for two services, streamed live on YouTube, plus special services and nights of prayer through the year.</p></header></div>
 <section class="sec band-night"><div class="wrap"><span class="eyebrow">This Sunday at LCC</span><h2>In person, online, or catch up</h2>{this_sunday()}</div></section>
 <section class="sec"><div class="wrap">
  <div class="sec-head"><div><span class="eyebrow">Timetable</span><h2>Services &amp; programmes</h2></div></div>
@@ -522,14 +495,14 @@ faqs = [("What time are services?", "LCC holds a First and a Second Service ever
         ("Can I watch online first?", "Yes — both Sunday services are streamed live on YouTube every week.")]
 P["visit.html"] = page("visit.html", "Plan your visit", "Plan your first visit to Life Celebration Centre on General Kariba Street, Freehold, Nakuru: services, map, directions, what to expect and a visitor enquiry form.",
 f"""
-<div class="wrap"><header class="page-hero"><span class="eyebrow">New here?</span><h1>We'd love to <em>welcome</em> you.</h1><p class="lead">Everything you need for your first Sunday at LCC.</p></header></div>
+<div class="wrap"><header class="page-hero"><span class="eyebrow">New here?</span><h1 data-split="words">We'd love to <em>welcome</em> you.</h1><p class="lead">Everything you need for your first Sunday at LCC.</p></header></div>
 <section class="sec"><div class="wrap">
  <span class="eyebrow">Your first visit, step by step</span><h2>The first-time visitor journey</h2>
- <ol class="journey mt2">
-  <li><b>Pick a service</b><p>Choose the First or Second Service on Sunday. Call {e(CT['phone'])} to confirm times.</p></li>
-  <li><b>Find us</b><p>General Kariba Street, Freehold, Nakuru — map below.</p></li>
-  <li><b>Arrive &amp; say hello</b><p>Ushers will welcome you and help you find a seat.</p></li>
-  <li><b>Stay &amp; connect</b><p>Stay for connection time and meet the church family.</p></li>
+ <ol class="journey-x mt2" data-stagger>
+  <li><span class="num">01</span><h3>Pick a service</h3><p>Choose the First or Second Service on Sunday. Call {e(CT['phone'])} to confirm times.</p></li>
+  <li><span class="num">02</span><h3>Find us</h3><p>General Kariba Street, Freehold, Nakuru — <a href="#find-us">map below</a>.</p></li>
+  <li><span class="num">03</span><h3>Arrive &amp; say hello</h3><p>Ushers will welcome you and help you find a seat.</p></li>
+  <li><span class="num">04</span><h3>Stay &amp; connect</h3><p>Stay for connection time and meet the church family.</p></li>
  </ol>
 </div></section>
 <section class="sec bg-sand" id="find-us"><div class="wrap split">
@@ -537,6 +510,7 @@ f"""
  <p class="mt2" style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-solid" href="{maps_url()}" rel="noopener" target="_blank">Open in Google Maps</a><a class="btn" href="tel:{e(CT['phone_intl'])}">Call {e(CT['phone'])}</a></p></div>
  <div class="map" data-map="https://www.google.com/maps?q={e(CT['maps_query']).replace(' ','+')}&amp;output=embed"><div><p><b>Interactive map</b></p><p class="muted">Loads Google Maps (Google's privacy policy applies).</p><button class="btn" type="button" data-map-load>Show map</button></div></div>
 </div></section>
+<div class="expand"><div class="sticky">{PH.pic(pick("worship", 2), "", w=1280, sizes="100vw")}<div class="over"><span class="eyebrow" style="color:var(--sun)">Sundays at LCC</span><h2>Come as you are.</h2></div></div></div>
 <section class="sec"><div class="wrap split">
  <div><span class="eyebrow">What to expect</span><h2>Your first Sunday</h2><p>Expect heartfelt worship, prayer and a message from the Bible. There's no pressure to give or to stand up — simply come and be with us.</p>
   <form class="form mt4" id="enquiry" action="api/submit.php" method="post" data-form="visit" novalidate>
@@ -554,13 +528,15 @@ f"""
 """, extra_ld=[{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faqs]}])
 
 # ---------------- MINISTRIES
+MFRAME = ["offset", "m-arch", "m-orb", "m-pill"]  # a different photographic frame for each ministry
+MREV = ["left", "arch", "up", "right"]
+MCAT = {"worship": "team", "youth": "youth", "prayer": "team", "leaders": "events", "fellowship": "worship", "conference": "conference"}
 P["ministries.html"] = page("ministries.html", "Ministries", "Ministries at LCC Nakuru: Praise & Worship (One Accord Ministers), Youth & Students, Prayer (Kesha), Leadership Development, Fellowship and the Cutting Edge Conference.",
 f"""
-<div class="wrap"><header class="page-hero"><span class="eyebrow">Ministries</span><h1>Discover your <em>ministry.</em></h1><p class="lead">Every ministry listed here is documented in LCC's own recordings and posts. Ask the welcome team on Sunday how to join.</p></header></div>
-<section class="sec"><div class="wrap">{discover_grid()}<p class="credit">{e(C['ministries_note'])}</p></div></section>
-{kente()}
+<div class="wrap"><header class="page-hero"><span class="eyebrow">Ministries</span><h1 data-split="words">Discover your <em>ministry.</em></h1><p class="lead">Every ministry listed here is documented in LCC's own recordings and posts. Ask the welcome team on Sunday how to join.</p></header></div>
+<section class="sec" style="padding-top:clamp(20px,3vw,40px)"><div class="wrap"><nav aria-label="Ministries on this page"><ul class="mini-list" data-stagger>{''.join(f'<li><a href="#{e(m["slug"])}"><b>{e(m["name"])}</b><span>{e(m["kind"])}</span></a></li>' for m in C["ministries"])}</ul></nav><p class="credit">{e(C['ministries_note'])}</p></div></section>
 <section class="sec"><div class="wrap mlist">
-{''.join(f'<article class="mitem" id="{e(m["slug"])}"><div class="mmedia">' + (video_card(VID[m["video"]]) if m.get("video") in VID else ph(m["name"], "wide")) + f'</div><div><span class="eyebrow">{e(m["kind"])} · {e(m["tag"])}</span><h2>{e(m["name"])}</h2><p class="lead" style="max-width:none">{e(m["text"])}</p><ul>' + ''.join(f'<li>{e(a)}</li>' for a in m.get("activities", [])) + f'</ul>' + (f'<a class="btn" href="{e(m["link"])}">Discover</a>' if m.get("link") else '<a class="btn" href="contact.html#message">Ask about joining</a>') + '</div></article>' for m in C['ministries'])}
+{''.join(f'<article class="mitem" id="{e(m["slug"])}"><div class="mmedia {MFRAME[i % len(MFRAME)]}" data-reveal="{MREV[i % len(MREV)]}">' + (video_card(VID[m["video"]]) if m.get("video") in VID else PH.pic(pick(MCAT.get(m["slug"], "worship"), 1), "f-arch" if i % 2 else "f-circle ringed")) + (PH.pic(pick(MCAT.get(m["slug"], "worship"), 0), "m-orbit f-circle", "circle", d=.5, sizes="20vw") if MFRAME[i % len(MFRAME)] == "m-orb" and m.get("video") in VID else "") + f'</div><div><span class="eyebrow">{e(m["kind"])} · {e(m["tag"])}</span><h2>{e(m["name"])}</h2><p class="lead" style="max-width:none">{e(m["text"])}</p><ul>' + ''.join(f'<li>{e(a)}</li>' for a in m.get("activities", [])) + f'</ul>' + (f'<a class="btn" href="{e(m["link"])}">Discover</a>' if m.get("link") else '<a class="btn" href="contact.html#message">Ask about joining</a>') + '</div></article>' for i, m in enumerate(C['ministries']))}
 </div></section>
 <section class="sec band-night"><div class="wrap split"><div><span class="eyebrow">Serve &amp; volunteer</span><h2>Want to serve?</h2><p class="lead">Tell us where you'd like to serve and the church office will connect you with the right ministry. Conference volunteers sign up on the official Cutting Edge site.</p></div><div style="align-self:center;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-sun" href="contact.html#message">I want to serve</a><a class="btn btn-ghost-light" href="{e(CF['volunteer'])}" rel="noopener" target="_blank">Volunteer at the conference</a></div></div></section>
 """)
@@ -625,12 +601,12 @@ ev_ld = [{"@context": "https://schema.org", "@type": "Event", "name": ev["title"
 cats = sorted({p["category"] for p in PAST})
 P["events.html"] = page("events.html", "Events", "Events at LCC Nakuru: Cutting Edge Conference 2027 (30 Mar – 4 Apr) and an archive of past events — Leaders' Summit, Praise Express, Pastors' and Spouses Conference, Kesha and more.",
 f"""
-<div class="wrap"><header class="page-hero"><span class="eyebrow">Events</span><h1>What's <em>coming up.</em></h1><p class="lead">Major events are listed here; weekly announcements are on our <a href="{e(SO['facebook'])}" rel="noopener" target="_blank">Facebook page</a>.</p></header></div>
+<div class="wrap"><header class="page-hero"><span class="eyebrow">Events</span><h1 data-split="words">What's <em>coming up.</em></h1><p class="lead">Major events are listed here; weekly announcements are on our <a href="{e(SO['facebook'])}" rel="noopener" target="_blank">Facebook page</a>.</p></header></div>
 <section class="sec"><div class="wrap">
  <span class="eyebrow">Featured · upcoming</span>
  {feature_conf()}
  <div class="sec-head mt4"><div><span class="eyebrow">Recurring</span><h2>Throughout the year</h2></div></div>
- <div class="cards">
+ <div class="cards" data-stagger>
   <div class="card"><span class="kind">Every Sunday</span><h3>First &amp; Second Service</h3><p class="muted">Streamed live on YouTube. <a href="services.html">Times &amp; details</a></p></div>
   <div class="card"><span class="kind">Every few months</span><h3>Praise Express Service</h3><p class="muted">Next date to be announced on Facebook.</p></div>
   <div class="card"><span class="kind">Special nights</span><h3>Kesha</h3><p class="muted">Including the annual Crossover Kesha on 31 December — date to be announced.</p></div>
@@ -690,6 +666,10 @@ f"""
  <div class="speaker-cloud mt2">{''.join(f'<span>{e(s)}</span>' for s in CF['all_speakers'])}</div>
  <p class="credit">As listed at cuttingedgeconference.co.ke/speakers</p></div>
 </div></section>
+<section class="sec" aria-labelledby="c26-h"><div class="wrap duo">
+ <div><span class="eyebrow">Last edition · April 2026</span><h2 id="c26-h" style="color:var(--bone)" data-split="words">Cutting Edge <em style="color:var(--sun)">2026</em> in pictures</h2><p class="lead">Six days of worship, teaching and preaching at LCC. These frames come from the 2026 conference streams, not the 2027 edition.</p></div>
+ <div class="xcollage cu-collage"><span class="shape" aria-hidden="true"></span>{PH.pic(pick("conference", 0), "c1", "left")}{PH.pic(pick("conference", 3), "c2", "up", d=.35)}{PH.pic(pick("conference", 1), "c3 f-circle", "circle", d=.7)}<span class="label">Cutting Edge Conference 2026 · LCC Nakuru</span></div>
+</div></section>
 <section class="sec"><div class="wrap">
  {rail("Cutting Edge Conference 2026", conf26, "rail-c26", "Previous edition · April 2026")}
  {rail("Earlier editions", conf_old, "rail-cold", "2024 and before")}
@@ -704,15 +684,35 @@ gcats = []
 for v, c in MOMENTS + [(x, "Conferences") for x in conf26[3:]] + [(x, "Sunday services") for x in latest_services[4:]]:
     if (v, c) not in gcats:
         gcats.append((v, c))
+_ALL = [p["slug"] for p in LIB]
+_gcats = [c for c in CATNAME if c in {p["cat"] for p in LIB}]
+_feat = [x for x in dict.fromkeys([pick("worship", 0), pick("team", 0), pick("conference", 0), pick("worship", 3), pick("events", 0), pick("team", 2), pick("conference", 1), pick("youth", 0)]) if x]
+_strip = [x for x in dict.fromkeys(picks("team", 5, 1) + picks("worship", 4, 1) + picks("conference", 4, 2) + picks("teaching", 3) + picks("events", 3, 1)) if x]
 P["gallery.html"] = page("gallery.html", "LCC Moments — gallery", "LCC Moments: Sunday services, praise and worship, conferences and special nights at Life Celebration Centre, Nakuru.",
 f"""
-<div class="wrap"><header class="page-hero"><span class="eyebrow">LCC Moments</span><h1>Church life, <em>captured.</em></h1><p class="lead">Moments from LCC's services, worship and conferences. Select any image to watch the moment it comes from.</p></header></div>
-<section class="sec"><div class="wrap">
- <div class="filters gallery-f" role="group" aria-label="Filter moments"><button class="chip" type="button" data-gfilter="all" aria-pressed="true">All</button>{''.join(f'<button class="chip" type="button" data-gfilter="{e(c)}" aria-pressed="false">{e(c)}</button>' for c in ["Sunday services","Praise & worship","Conferences","Special nights"])}</div>
- {collage(gcats, "gallery")}
- <div class="notice mt4"><b>About these images</b>These are moments captured from LCC's own YouTube streams. The church's Facebook photo albums (fellowship, Leaders' Summit, Sunday services) are catalogued and will appear here once the church office approves them for the website.</div>
+<div class="wrap"><header class="page-hero"><span class="eyebrow">LCC Moments</span><h1 data-split="words">Church life, <em>captured.</em></h1><p class="lead" data-reveal="rise" style="--d:.4s">Moments from LCC's Sunday services, Praise Express, Kesha nights and the Cutting Edge Conference. Select any photograph to view it full screen.</p></header></div>
+
+<section class="sec" aria-labelledby="g1-h" style="padding-top:clamp(24px,3vw,40px)"><div class="wrap">
+ <h2 class="sr-only" id="g1-h">Featured moments</h2>
+ <div class="spread">
+  {PH.pic(_feat[0], "s1", "scale", eager=True, sizes="(max-width:860px) 100vw, 58vw")}{PH.pic(_feat[1], "s2", "right", d=.15)}{PH.pic(_feat[2], "s3", "up", d=.3, sizes="25vw")}{PH.pic(_feat[3], "s4", "up", d=.45, sizes="18vw")}{PH.pic(_feat[4], "s5", "left", d=.2, sizes="25vw")}{PH.pic(_feat[5], "s6", "left", d=.35, sizes="40vw")}
+  <div class="note"><span class="eyebrow">2025 – 2026</span><h3>A year of worship</h3><p class="muted">Sunday services, Praise Express, the Leaders’ Summit and the Cutting Edge Conference.</p><span class="cap-line"><b>Source</b>LCC's own service streams</span></div>
+ </div>
 </div></section>
-""")
+
+<section aria-labelledby="g4-h" style="padding-bottom:clamp(48px,6vw,88px)">
+ <div class="wrap"><div class="sec-head"><div><span class="eyebrow">Film strip</span><h2 id="g4-h">Drag through the year</h2></div></div></div>
+ <div class="strip"><div class="xrail" tabindex="0" role="region" aria-label="Film strip of LCC moments (scrollable)">{''.join(f'<figure>{PH.lb_btn(x, "strip", sizes="(max-width:600px) 70vw, 28vw")}<figcaption><b>{e(CATNAME.get(BY[x]["cat"]))}</b>{e(BY[x]["short"])}</figcaption></figure>' for x in _strip)}</div>
+ <div class="nav-btns"><button class="chip" type="button" data-strip="prev" aria-label="Scroll film strip back">←</button><button class="chip" type="button" data-strip="next" aria-label="Scroll film strip forward">→</button></div></div>
+</section>
+
+<section class="sec bg-sand" aria-labelledby="g7-h"><div class="wrap">
+ <div class="sec-head"><div><span class="eyebrow">Watch the moments</span><h2 id="g7-h">Moments from the streams</h2></div></div>
+ <div class="filters gallery-f" role="group" aria-label="Filter moments"><button class="chip" type="button" data-gfilter="all" aria-pressed="true">All</button>{''.join(f'<button class="chip" type="button" data-gfilter="{e(c)}" aria-pressed="false">{e(c)}</button>' for c in ["Sunday services","Praise & worship","Conferences","Special nights"])}</div>
+ {collage(gcats[:12], "gallery")}
+ <div class="notice mt4"><b>About these images</b>Every photograph on this page is a frame from one of LCC's own YouTube streams, and its caption names the service or event. The church's Facebook photographs will be added once the LCC media team approves them for the website. If you appear in a photograph and would like it removed, please <a href="contact.html">contact the church office</a>.</div>
+</div></section>
+""", current="gallery.html")
 
 # ---------------- NEWS
 P["news.html"] = page("news.html", "Announcements", "Announcements and stories from Life Celebration Centre (LCC) Nakuru, with dates clearly marked.",
